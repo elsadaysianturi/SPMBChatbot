@@ -26,12 +26,12 @@
     display: none;
     position: fixed;
     bottom: 100px; 
-    right: 30px;
-    width: 370px;
+    right: 34px;
+    width: 374px;
     max-height: calc(100vh - 150px); 
     background-color: #fff;
     border: 1px solid #ddd;
-    border-radius: 8px;
+    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
     z-index: 9998; 
     overflow-y: auto;
