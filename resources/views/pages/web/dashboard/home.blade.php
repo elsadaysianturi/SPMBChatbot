@@ -390,8 +390,8 @@
                     </div>
                     <div id="chatbot-container" class="chatbot-container">
                         <div class="chatbot-header">
-                            <span class="close-chatbot" onclick="closeChatbot()">&times;</span>
                             <h4>Chatbot SPMB IT Del</h4>
+                            <span class="close-chatbot" onclick="closeChatbot()">&times;</span>
                         </div>
                         <div id="chatbot-content" class="chatbot-content">
                             <div class="chat-message" id="welcome-message">

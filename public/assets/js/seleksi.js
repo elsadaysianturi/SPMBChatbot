@@ -10,12 +10,13 @@ var cssStyles = `
 }
 
 .user-message p {
-    background-color: #808080; 
+    background-color: #101920; 
     color: white ;
     display: inline-block;
-    border-radius: 10px; 
+    border-radius: 20px; 
     padding: 10px 15px;
     margin: 5px;
+    font-family: "Avenir Next Paneuropean SemiCondensed", sans-serif;
 }
 
 .admin-message {
@@ -23,12 +24,13 @@ var cssStyles = `
 }
 
 .admin-message p {
-    background-color: #f0f0f0; 
+    background-color: #F3F3F3; 
     color: #333; 
     display: inline-block;
-    border-radius: 10px; 
+    border-radius: 20px; 
     padding: 10px 15px;
     margin: 5px;
+    font-family: "Avenir Next Paneuropean SemiCondensed", sans-serif;
 }
 
 `;

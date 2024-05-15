@@ -44,10 +44,23 @@
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     cursor: move;
+    display: flex;
+    justify-content: space-between; /* Align items to the left and right */
+    align-items: center; /* Center items vertically */
 }
 
 .chatbot-header h4 {
     margin: 0;
+}
+.close-chatbot {
+    cursor: pointer;
+}
+
+/* Adjust the styling of the close button as needed */
+.close-chatbot {
+    font-size: 30px;
+    color: #fff;
+    padding: 5px;
 }
 
 .chatbot-content {
