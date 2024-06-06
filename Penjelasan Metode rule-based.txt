@@ -1,0 +1,114 @@
+// Penjelasan Metode rule-based pada seleksi.js
+
+listItem.onclick = function() {
+    processUserInput(rule.question);
+};
+questionList.appendChild(listItem);
+});
+
+document.getElementById('chatbot-content').appendChild(questionList);
+}
+
+// Fungsi untuk menampilkan pesan
+function displayMessage(message, sender) {
+var chatContent = document.getElementById('chatbot-content');
+var chatMessage = document.createElement('div');
+chatMessage.className = 'chat-message';
+if (sender === 'user') {
+chatMessage.innerHTML = "<p><strong>You: </strong>" + message + "</p>";
+} else {
+chatMessage.innerHTML = "<p><strong>Admin: </strong>" + message + "</p>";
+}
+chatContent.appendChild(chatMessage);
+chatContent.scrollTop = chatContent.scrollHeight;
+}
+
+// Fungsi untuk mengolah input pengguna
+function processUserInput(question) {
+// Tampilkan pertanyaan pengguna
+displayMessage(question, 'user');
+
+// Cari jawaban berdasarkan pertanyaan
+var answer = findAnswer(question);
+
+// Tampilkan jawaban
+if (answer) {
+if (Array.isArray(answer)) {
+    displayMultiPartAnswer(answer);
+} else {
+    displayMessage(answer, 'admin');
+}
+} else {
+displayMessage("Maaf, saya tidak mengerti pertanyaan Anda.", 'admin');
+}
+}
+
+// Fungsi untuk mencari jawaban berdasarkan pertanyaan
+function findAnswer(question) {
+// Cari jawaban dalam aturan kategori "Seleksi"
+var answer = seleksiRules.find(function(rule) {
+return rule.question.toLowerCase() === question.toLowerCase();
+});
+
+// Jika tidak ditemukan jawaban dalam aturan kategori "Seleksi",
+// maka cari jawaban dalam aturan kategori "Pendaftaran"
+if (!answer) {
+answer = pendaftaranRules.find(function(rule) {
+    return rule.question.toLowerCase() === question.toLowerCase();
+});
+}
+
+// Jika tidak ditemukan jawaban dalam kedua kategori,
+// maka cari jawaban dalam aturan tambahan
+if (!answer) {
+answer = additionalRules.find(function(rule) {
+    return rule.question.toLowerCase() === question.toLowerCase();
+});
+}
+
+// Kembalikan jawaban yang ditemukan atau null jika tidak ditemukan
+return answer ? answer.answer : null;
+}
+
+Ya, kode yang telah Anda berikan menggunakan metode rule-based untuk mengelola pertanyaan dan jawaban dalam chatbot. Metode rule-based dalam konteks ini mengacu pada pendekatan di mana aturan atau "rules" yang telah ditentukan sebelumnya digunakan untuk menentukan bagaimana chatbot harus merespons terhadap input pengguna.
+
+Dalam kode yang Anda berikan:
+- Terdapat aturan yang telah ditentukan sebelumnya untuk berbagai kategori pertanyaan, seperti kategori "Seleksi" dan "Pendaftaran".
+- Setiap aturan memiliki daftar pertanyaan dan jawaban terkait.
+- Ketika pengguna memilih kategori tertentu, aturan yang sesuai digunakan untuk menampilkan pertanyaan yang relevan dan jawaban yang telah ditetapkan sebelumnya untuk kategori tersebut.
+
+Ini adalah pendekatan yang efektif untuk chatbot dengan cakupan dan kebutuhan tertentu, terutama ketika domain atau konteks percakapan terbatas dan dapat dijelaskan dengan baik melalui aturan-aturan yang telah ditetapkan sebelumnya.
+
+Ya, kode yang Anda tunjukkan menggunakan pendekatan rule-based dalam mengelola input pengguna dan memberikan respons. Berikut adalah beberapa poin yang menunjukkan penggunaan metode rule-based:
+
+1. **Pencocokan Aturan**: Dalam fungsi `findAnswer`, terdapat pencarian jawaban berdasarkan pertanyaan pengguna dengan mencocokkan pertanyaan tersebut dengan aturan-aturan yang telah ditentukan sebelumnya dalam kategori "Seleksi", "Pendaftaran", dan aturan tambahan.
+
+2. **Aturan yang Ditentukan Sebelumnya**: Aturan-aturan untuk pertanyaan dan jawaban telah ditentukan sebelumnya dalam bentuk array `seleksiRules`, `pendaftaranRules`, dan `additionalRules`.
+
+3. **Respon Terstruktur**: Respon terhadap input pengguna dibangun berdasarkan aturan-aturan yang telah ditentukan sebelumnya, dengan memeriksa apakah pertanyaan pengguna cocok dengan pertanyaan yang telah ditentukan dalam aturan, dan jika cocok, menampilkan jawaban yang telah ditetapkan.
+
+Dengan demikian, penggunaan metode rule-based terlihat jelas dalam kode yang Anda berikan.
+
+Ya, kode tersebut menggunakan pendekatan berbasis aturan (rule-based approach) dalam implementasinya. Berikut adalah beberapa poin yang menunjukkan penggunaan metode rule-based dalam kode tersebut:
+
+1. **Pemilihan Kategori**: Fungsi `selectCategory` mengatur kategori pertanyaan yang akan ditangani berdasarkan input pengguna. Setiap kategori memiliki aturan-aturan yang berbeda untuk diproses.
+
+2. **Pemrosesan Aturan**: Fungsi `matchRule` digunakan untuk mencocokkan input pengguna dengan aturan-aturan yang ada. Ini dilakukan dengan cara memeriksa setiap aturan dan mencocokkan kata kunci yang ada dalam pertanyaan pengguna dengan kata kunci yang didefinisikan dalam aturan tersebut.
+
+3. **Penanganan Pertanyaan**: Setelah aturan yang cocok ditemukan, jawaban yang sesuai ditampilkan kepada pengguna menggunakan fungsi `displayAnswer`.
+
+4. **Tombol Pertanyaan**: Fungsi `displayQuestionButtons` menampilkan tombol-tombol pertanyaan yang sesuai dengan kategori yang dipilih oleh pengguna. Ini memungkinkan pengguna untuk memilih pertanyaan tertentu untuk ditanyakan.
+
+Dengan demikian, keseluruhan struktur dan logika yang diimplementasikan dalam kode tersebut mengikuti pendekatan rule-based dalam penanganan interaksi dengan pengguna.
+
+Ya, code tersebut menggunakan metode rule-based. Berikut adalah alasan mengapa code tersebut dapat dikategorikan sebagai metode rule-based:
+
+1. **Pembuatan Aturan**: Code tersebut mendefinisikan aturan-aturan yang terkait dengan pertanyaan dan jawaban. Setiap aturan memiliki pertanyaan dan jawaban yang sesuai.
+
+2. **Pemrosesan Aturan**: Terdapat fungsi `matchRule` yang digunakan untuk mencocokkan input pengguna dengan aturan-aturan yang telah ditentukan. Jika input pengguna cocok dengan salah satu aturan, maka jawaban yang sesuai akan ditampilkan.
+
+3. **Struktur Data Aturan**: Aturan-aturan disusun dalam bentuk array of objects, di mana setiap objek mewakili satu aturan dengan properti `question` dan `answer`.
+
+4. **Penanganan Input Pengguna**: Fungsi `processUserInput` digunakan untuk memproses input pengguna dan mencari jawaban yang sesuai berdasarkan aturan-aturan yang telah ditetapkan.
+
+Dengan demikian, code tersebut menggunakan metode rule-based untuk menangani interaksi dengan pengguna.
