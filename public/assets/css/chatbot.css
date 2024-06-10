@@ -4,23 +4,24 @@
     right: 20px;
     width: 50px;
     height: 50px;
-    background-color: #8e24aa;
-    border-radius: 50%;
+    /* background-color: #8e24aa;
+    border-radius: 50%; */
     cursor: pointer;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
-    z-index: 9999;
-    transition: background-color 0.3s, transform 0.3s;
+    /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); */
+    /* z-index: 9999; */
+    /* transition: background-color 0.3s, transform 0.3s; */
 }
 
-.chatbot-button:hover {
+/* .chatbot-button:hover {
     background-color: #7b1fa2;
     transform: scale(1.1);
-}
+} */
 
 .chatbot-button img {
     width: 100%;
     height: auto;
 }
+
 
 .chatbot-container {
     display: none;
@@ -40,10 +41,14 @@
 .chatbot-header {
     background-color: #8e24aa;
     color: #fff;
-    padding: 10px;
+    padding: 15px;
+    height: 60px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
     cursor: move;
+    display: flex;
+    justify-content: space-between; /* Align items to the left and right */
+    align-items: center; /* Center items vertically */
 }
 
 .chatbot-header h4 {
@@ -57,6 +62,13 @@
 .categories ul {
     list-style-type: none;
     padding: 0;
+}
+
+/* Adjust the styling of the close button as needed */
+.close-chatbot {
+    font-size: 25px;
+    color: #fff;
+    padding: 5px;
 }
 
 .categories li {
@@ -128,7 +140,7 @@
     cursor: pointer;
     display: flex;
     align-items: center;
-    color: #007bff;
+    color: #fff;
     margin-bottom: 10px;
 }
 
@@ -138,9 +150,9 @@
     margin-right: 5px;
 }
 
-.back-to-categories:hover {
+/* .back-to-categories:hover {
     text-decoration: underline;
-}
+} */
 #questions {
     padding: 20px;
     background-color: #f0f0f0;
