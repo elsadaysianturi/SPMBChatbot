@@ -123,9 +123,3 @@ function displayMessage(message, sender) {
     chatContent.appendChild(chatMessage);
     chatContent.scrollTop = chatContent.scrollHeight;
 }
-
-function sendMessage() {
-    var userInput = document.getElementById("user-input").value;
-    processUserInput(userInput);
-    document.getElementById("user-input").value = "";
-}

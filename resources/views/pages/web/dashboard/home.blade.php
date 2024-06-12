@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en-US">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="csrf-param" content="_csrf-frontend">
     <meta name="csrf-token" content="QCkU7jtrAqFaZKwSC_eNzIq-GxSNSwJnyUNICgAFDpwBU1uBcB1G0BMIwip7x9-a34h-XMcgOxS6KnB-SUx0-g==">
     <title>SPMB</title>
@@ -26,7 +26,6 @@
         }
     </style>
 </head>
-
 <body>
     <div class="wrap">
         <nav id="w0" class="navbar-inverse2 navbar-fixed-top navbar">

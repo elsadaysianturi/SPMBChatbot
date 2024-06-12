@@ -5,6 +5,7 @@ use App\Http\Controllers\KategoriController;
 use App\Http\Controllers\PertanyaanJawabanController;
 use App\Http\Controllers\ProgramStudiController;
 use App\Http\Controllers\PertanyaanjawabanProgramstudiController;
+use App\Http\Controllers\ChatbotController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,3 +28,4 @@ Route::get('/questions/{id}/answer', [PertanyaanJawabanController::class, 'getAn
 Route::get('/program-studi', [ProgramStudiController::class, 'index']);
 Route::get('/program-studi/{id}/questions', [PertanyaanjawabanProgramstudiController::class, 'getQuestionsByProgramStudi']);
 Route::get('/program-studi-questions/{id}/answer', [PertanyaanjawabanProgramstudiController::class, 'getAnswerByQuestionId']);
+Route::post('/chatbot/message', [ChatbotController::class, 'handleUserInput']);

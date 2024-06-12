@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jun 06, 2024 at 03:14 AM
+-- Generation Time: Jun 12, 2024 at 02:18 AM
 -- Server version: 5.7.33
 -- PHP Version: 8.1.6
 
@@ -88,7 +88,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
 (14, '2019_12_14_000001_create_personal_access_tokens_table', 1),
 (15, '2024_06_01_191941_add_timestamps_to_kategori_table', 1),
 (16, '2024_06_04_030638_create_program_studi_table', 2),
-(17, '2024_06_04_030700_create_pertanyaanjawaban_programstudi_table', 3);
+(17, '2024_06_04_030700_create_pertanyaanjawaban_programstudi_table', 3),
+(20, '2024_06_10_064008_create_rules_table', 4);
 
 -- --------------------------------------------------------
 
@@ -254,6 +255,75 @@ INSERT INTO `program_studi` (`id`, `nama_programstudi`, `created_at`, `updated_a
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `rules`
+--
+
+CREATE TABLE `rules` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `category` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `keyword` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `response` text COLLATE utf8mb4_unicode_ci NOT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `rules`
+--
+
+INSERT INTO `rules` (`id`, `category`, `keyword`, `response`, `created_at`, `updated_at`) VALUES
+(1, 'Salam', 'Hai', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(2, 'Salam', 'Halo', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(3, 'Salam', 'Hello', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(4, 'Salam', 'Pagi', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(5, 'Salam', 'Selamat pagi', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(6, 'Salam', 'Siang', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(7, 'Salam', 'Selamat siang', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(8, 'Salam', 'Malam', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(9, 'Salam', 'Selamat malam', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(10, 'Salam', 'Shalom', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(11, 'Salam', 'Assalamualaikum', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(12, 'Salam', 'p', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(13, 'Salam', 'ping', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(14, 'Salam', 'Hola', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(15, 'Salam', 'Hei', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(16, 'Salam', 'Hi', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(17, 'Salam', 'Yo', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(18, 'Salam', 'Bung', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(19, 'Salam', 'Hallo', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(20, 'Salam', 'Hai…', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(21, 'Salam', 'Saya butuh bantuan', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(22, 'Salam', 'Maaf', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(23, 'Salam', 'Pardon', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(24, 'Salam', 'Maaf mau tanya', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(25, 'Salam', 'Nanya', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(26, 'Salam', 'Tanya', 'Selamat datang di chatbot FAQ layanan SPMB IT Del yang melayani kamu seputar pertanyaan SPMB IT Del. \r\nAda yang bisa saya bantu? \r\n', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(27, 'Seleksi', 'Jalur seleksi', 'Jalur seleksi yang disediakan oleh SPMB IT Del adalah sebanyak 6 jalur yaitu sebagai berikut: \r\n1. PMDK (Penelusuran Minat Bakat dan Kemampuan) \r\n2. USM 1 (Ujian Saring Masuk) \r\n3. USM 2 (Ujian Saring Masuk) \r\n4. USM 3 (Ujian Saring Masuk) \r\n5. UTBK (Ujian Tulis Berbasis Komputer/Sertifikat UTBK) \r\n6. JPS (Jalur Prestasi Siswa) \r\nUntuk detail jadwal masing-masing jalur dapat dilihat melalui link berikut: \r\nhttps://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex ', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(28, 'Seleksi', 'Jalur', 'Jalur seleksi yang disediakan oleh SPMB IT Del adalah sebanyak 6 jalur yaitu sebagai berikut: \r\n1. PMDK (Penelusuran Minat Bakat dan Kemampuan) \r\n2. USM 1 (Ujian Saring Masuk) \r\n3. USM 2 (Ujian Saring Masuk) \r\n4. USM 3 (Ujian Saring Masuk) \r\n5. UTBK (Ujian Tulis Berbasis Komputer/Sertifikat UTBK) \r\n6. JPS (Jalur Prestasi Siswa) \r\nUntuk detail jadwal masing-masing jalur dapat dilihat melalui link berikut: \r\nhttps://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex ', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(29, 'Seleksi', 'Jalur penerimaan', 'Jalur seleksi yang disediakan oleh SPMB IT Del adalah sebanyak 6 jalur yaitu sebagai berikut: \r\n1. PMDK (Penelusuran Minat Bakat dan Kemampuan) \r\n2. USM 1 (Ujian Saring Masuk) \r\n3. USM 2 (Ujian Saring Masuk) \r\n4. USM 3 (Ujian Saring Masuk) \r\n5. UTBK (Ujian Tulis Berbasis Komputer/Sertifikat UTBK) \r\n6. JPS (Jalur Prestasi Siswa) \r\nUntuk detail jadwal masing-masing jalur dapat dilihat melalui link berikut: \r\nhttps://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex ', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(30, 'Seleksi', 'Proses seleksi', 'Jalur seleksi yang disediakan oleh SPMB IT Del adalah sebanyak 6 jalur yaitu sebagai berikut: \r\n1. PMDK (Penelusuran Minat Bakat dan Kemampuan) \r\n2. USM 1 (Ujian Saring Masuk) \r\n3. USM 2 (Ujian Saring Masuk) \r\n4. USM 3 (Ujian Saring Masuk) \r\n5. UTBK (Ujian Tulis Berbasis Komputer/Sertifikat UTBK) \r\n6. JPS (Jalur Prestasi Siswa) \r\nUntuk detail jadwal masing-masing jalur dapat dilihat melalui link berikut: \r\nhttps://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex ', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(31, 'Seleksi', 'Sistem seleksi', 'Jalur seleksi yang disediakan oleh SPMB IT Del adalah sebanyak 6 jalur yaitu sebagai berikut: \r\n1. PMDK (Penelusuran Minat Bakat dan Kemampuan) \r\n2. USM 1 (Ujian Saring Masuk) \r\n3. USM 2 (Ujian Saring Masuk) \r\n4. USM 3 (Ujian Saring Masuk) \r\n5. UTBK (Ujian Tulis Berbasis Komputer/Sertifikat UTBK) \r\n6. JPS (Jalur Prestasi Siswa) \r\nUntuk detail jadwal masing-masing jalur dapat dilihat melalui link berikut: \r\nhttps://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex ', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(32, 'Seleksi', 'Ujian seleksi', 'Jalur seleksi yang disediakan oleh SPMB IT Del adalah sebanyak 6 jalur yaitu sebagai berikut: \r\n1. PMDK (Penelusuran Minat Bakat dan Kemampuan) \r\n2. USM 1 (Ujian Saring Masuk) \r\n3. USM 2 (Ujian Saring Masuk) \r\n4. USM 3 (Ujian Saring Masuk) \r\n5. UTBK (Ujian Tulis Berbasis Komputer/Sertifikat UTBK) \r\n6. JPS (Jalur Prestasi Siswa) \r\nUntuk detail jadwal masing-masing jalur dapat dilihat melalui link berikut: \r\nhttps://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex ', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(33, 'Seleksi', 'Penilaian seleksi', 'Jalur seleksi yang disediakan oleh SPMB IT Del adalah sebanyak 6 jalur yaitu sebagai berikut: \r\n1. PMDK (Penelusuran Minat Bakat dan Kemampuan) \r\n2. USM 1 (Ujian Saring Masuk) \r\n3. USM 2 (Ujian Saring Masuk) \r\n4. USM 3 (Ujian Saring Masuk) \r\n5. UTBK (Ujian Tulis Berbasis Komputer/Sertifikat UTBK) \r\n6. JPS (Jalur Prestasi Siswa) \r\nUntuk detail jadwal masing-masing jalur dapat dilihat melalui link berikut: \r\nhttps://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex ', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(34, 'Seleksi', 'Penilaian', 'Jalur seleksi yang disediakan oleh SPMB IT Del adalah sebanyak 6 jalur yaitu sebagai berikut: \r\n1. PMDK (Penelusuran Minat Bakat dan Kemampuan) \r\n2. USM 1 (Ujian Saring Masuk) \r\n3. USM 2 (Ujian Saring Masuk) \r\n4. USM 3 (Ujian Saring Masuk) \r\n5. UTBK (Ujian Tulis Berbasis Komputer/Sertifikat UTBK) \r\n6. JPS (Jalur Prestasi Siswa) \r\nUntuk detail jadwal masing-masing jalur dapat dilihat melalui link berikut: \r\nhttps://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex ', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(35, 'Seleksi', 'Persyaratan seleksi', 'Berikut merupakan persyaratan yang harus dipenuhi oleh calon pendaftar SPMB IT Del. Terdapat dua persyaratan yaitu persyaratan umum dan persyaratan khusus program studi:\r\na) Persyaratan umum\r\n1. Memiliki minat yang tinggi untuk melanjutkan studi di IT Del dan akan mendaftarkan diri sebagai mahasiswa IT Del apabila dinyatakan lulus seleksi untuk program USM;\r\n2. Siswa berasal dari jurusan yang tidak termasuk dalam kelompok Ilmu Sosial, Budaya atau Bahasa;\r\n3. Lulusan SMA atau SMK Teknik pada semua jurusan dengan tahun ijazah 2021, 2022,2023;\r\n4. Usia maksimum 21 tahun per 31 Agustus 2024;\r\n5. Mengikuti tes akademik daring berupa Matematika, Bahasa Inggris, dan Tes Potensi Akademik;\r\n6. Dapat memilih maksimal 3 pilihan program studi, dari 9 program studi yang ada di IT Del yakni:\r\n• Fakultas Vokasi [FV], Program Studi:\r\n1. Teknologi Informasi (D3)\r\n2. Teknologi Komputer (D3)\r\n3. Teknologi Rekayasa Perangkat Lunak (D4)\r\n• Fakultas Informatika & Teknik Elektro [FITE], Program Studi:\r\n1. Informatika (S1)\r\n2. Teknik Elektro (S1)\r\n3. Sistem Informasi (S1)\r\n• Fakultas Teknologi Industri [FTI], Program Studi:\r\n1. Manajemen Rekayasa (S1)\r\n2. Teknik Metalurgi (S1)\r\n• Fakultas Bioteknologi [FB], Program Studi:\r\n1. Teknik Bioproses (S1)\r\nb) Persyaratan khusus program studi\r\na) Program Studi S1 Teknik Elektro: \r\n• *Tidak Buta Warna, dibuktikan dengan melampirkan Surat Keterangan Tidak Buta Warna dari Dokter Spesialis Mata \r\n• SMA jurusan IPA/MIA atau SMK Teknik (Elektro, Elektronika, Listrik)\r\nb) Program Studi S1 Teknik Bioproses: \r\n• *Tidak Buta Warna, dibuktikan dengan melampirkan Surat Keterangan Tidak Buta Warna dari Dokter Spesialis Mata \r\n• SMA jurusan IPA/MIA.\r\nc) Program Studi Manajemen Rekayasa: \r\n• Mata \r\n• SMA jurusan IPA/MIA.\r\nd) Program Studi S1 Informatika, S1 Sistem Informasi, D4 Teknologi Rekayasa Perangkat Lunak, D3 Teknologi Informasi dan D3 Teknologi Komputer: \r\n• SMA jurusan IPA/MIA atau SMK Teknik (Informatika, Komputer).\r\nKet *: disampaikan pada saat daftar ulang daring', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(36, 'Seleksi', 'Hasil seleksi', 'Hasil Seleksi SPMB dapat di lihat pada website resmi https://spmb.del.ac.id/ yang terdapat pada halaman home bagian pengumuman atau dapat dilihat pada link berikut: http://spmb.del.ac.id/index.php?r=pmb-pengumuman%2Findex ', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(37, 'Seleksi', 'Pengumuman hasil seleksi', 'Hasil Seleksi SPMB dapat di lihat pada website resmi https://spmb.del.ac.id/ yang terdapat pada halaman home bagian pengumuman atau dapat dilihat pada link berikut: http://spmb.del.ac.id/index.php?r=pmb-pengumuman%2Findex', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(38, 'Seleksi', 'Pengumuman seleksi', 'Hasil Seleksi SPMB dapat di lihat pada website resmi https://spmb.del.ac.id/ yang terdapat pada halaman home bagian pengumuman atau dapat dilihat pada link berikut: http://spmb.del.ac.id/index.php?r=pmb-pengumuman%2Findex', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(39, 'Seleksi', 'Hasil akhir', 'Hasil Seleksi SPMB dapat di lihat pada website resmi https://spmb.del.ac.id/ yang terdapat pada halaman home bagian pengumuman atau dapat dilihat pada link berikut: http://spmb.del.ac.id/index.php?r=pmb-pengumuman%2Findex', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(40, 'Pendaftaran', 'proses pendaftaran', 'Berikut merupakan panduan pendaftaran Seleksi Penerimaan Mahasiswa Baru (SPMB) IT Del. Pendaftaran dapat dilakukan dengan dua cara yaitu daring dan luring. a) Luring: 1. Pendaftaran setiap Kamis-Jumat Pukul 13.00-17.00 WIB. 2. Mengisi formulir pendaftaran 3. Membawa foto 3X4 2 lembar. b) Daring: Buka website https://spmb.del.ac.id/ 1. Melakukan registrasi dan aktivasi akun di Email 2. Login dengan akun yang telah didaftarkan 3. Pilih 3 program studi yang diminati 4. Mengisi data diri - Data jumlah Mata Pelajaran Semester V - Data Total Nilai Rapor - Foto 3X4 [size max 1 MB] 5. Menentukan besaran uang pembangunan 6. Verifikasi data oleh panitia SPMB IT Del Mendapatkan notifikasi bahwa anda telah terdaftar', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(41, 'Pendaftaran', 'daftar', 'Berikut merupakan panduan pendaftaran Seleksi Penerimaan Mahasiswa Baru (SPMB) IT Del. Pendaftaran dapat dilakukan dengan dua cara yaitu daring dan luring. a) Luring: 1. Pendaftaran setiap Kamis-Jumat Pukul 13.00-17.00 WIB. 2. Mengisi formulir pendaftaran 3. Membawa foto 3X4 2 lembar. b) Daring: Buka website https://spmb.del.ac.id/ 1. Melakukan registrasi dan aktivasi akun di Email 2. Login dengan akun yang telah didaftarkan 3. Pilih 3 program studi yang diminati 4. Mengisi data diri - Data jumlah Mata Pelajaran Semester V - Data Total Nilai Rapor - Foto 3X4 [size max 1 MB] 5. Menentukan besaran uang pembangunan 6. Verifikasi data oleh panitia SPMB IT Del Mendapatkan notifikasi bahwa anda telah terdaftar', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(42, 'Pendaftaran', 'biaya pendaftaran', 'Biaya pendaftaran SPMB IT Del sebesar Rp. 300.000,- (Tiga Ratus Ribu Rupiah). Pembayaran dapat dilakukan secara cash maupun non-cash dengan cara transfer ke rekening yang tertera pada website resmi SPMB IT Del https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(43, 'Pendaftaran', 'waktu pendaftaran', 'Waktu pendaftaran SPMB IT Del adalah setiap Kamis-Jumat Pukul 13.00-17.00 WIB. Proses pendaftaran dapat dilakukan secara daring maupun luring. Informasi lebih lanjut dapat dilihat pada website resmi SPMB IT Del https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(44, 'Pendaftaran', 'persyaratan pendaftaran', 'Berikut merupakan persyaratan pendaftaran SPMB IT Del: 1. Mengisi formulir pendaftaran. 2. Membawa foto 3X4 2 lembar. 3. Melakukan registrasi dan aktivasi akun di Email. 4. Memilih 3 program studi yang diminati. 5. Mengisi data diri, termasuk data jumlah Mata Pelajaran Semester V dan Total Nilai Rapor. 6. Menentukan besaran uang pembangunan. 7. Melakukan verifikasi data oleh panitia SPMB IT Del. Informasi lebih lanjut dapat dilihat pada website resmi SPMB IT Del https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(45, 'Pendaftaran', 'penerimaan pendaftaran', 'Penerimaan pendaftaran SPMB IT Del dilakukan setiap Kamis-Jumat Pukul 13.00-17.00 WIB. Informasi lebih lanjut dapat dilihat pada website resmi SPMB IT Del https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(46, 'Pendaftaran', 'konfirmasi pendaftaran', 'Setelah mendaftar, peserta SPMB IT Del akan menerima notifikasi konfirmasi bahwa pendaftarannya telah berhasil. Informasi lebih lanjut dapat dilihat pada website resmi SPMB IT Del https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(47, 'Pendaftaran', 'informasi pendaftaran', 'Informasi lebih lanjut mengenai pendaftaran SPMB IT Del dapat dilihat pada website resmi https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex', '2024-06-09 14:31:56', '2024-06-09 14:31:56'),
+(48, 'Pendaftaran', 'cek status pendaftaran', 'Status pendaftaran SPMB IT Del dapat dicek pada website resmi https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex', '2024-06-09 14:31:56', '2024-06-09 14:31:56');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -325,6 +395,12 @@ ALTER TABLE `program_studi`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `rules`
+--
+ALTER TABLE `rules`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -351,7 +427,7 @@ ALTER TABLE `kategori`
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `personal_access_tokens`
@@ -376,6 +452,12 @@ ALTER TABLE `pertanyaan_jawaban`
 --
 ALTER TABLE `program_studi`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `rules`
+--
+ALTER TABLE `rules`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- AUTO_INCREMENT for table `users`

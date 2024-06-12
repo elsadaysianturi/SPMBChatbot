@@ -1,8 +1,6 @@
 var chatbotButton = document.getElementById("chatbot-button");
 var chatbotContainer = document.getElementById("chatbot-container");
 var closeChatbotButton = document.querySelector(".close-chatbot");
-// var closeIcon =
-//     '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>';
 
 chatbotButton.addEventListener("mouseenter", function () {
     if (
@@ -66,5 +64,52 @@ function displayMultiPartAnswer(answerParts) {
         chatMessage.innerHTML = "<p><strong>Admin: </strong>" + part + "</p>";
         chatContent.appendChild(chatMessage);
     });
+    chatContent.scrollTop = chatContent.scrollHeight;
+}
+function sendMessage() {
+    var userInput = document.getElementById("user-input").value;
+
+    displayMessage(userInput, "user");
+
+    fetch("/chatbot/message", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content"),
+        },
+        body: JSON.stringify({ message: userInput }),
+    })
+        .then((response) => {
+            console.log("Raw response:", response);
+            return response.json(); 
+        })
+        .then((data) => {
+            displayMessage(data.response, "admin");
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            displayMessage(
+                "Terjadi kesalahan. Silakan coba lagi nanti.",
+                "admin"
+            );
+        });
+
+    document.getElementById("user-input").value = "";
+}
+
+function displayMessage(message, sender) {
+    var chatContent = document.getElementById("chatbot-content");
+    var chatMessage = document.createElement("div");
+    chatMessage.className = "chat-message";
+
+    var messageClass = sender === "user" ? "user-message" : "admin-message";
+
+    chatMessage.innerHTML = `<p><strong>${
+        sender === "user" ? "You" : "Admin"
+    }: </strong>${message}</p>`;
+    chatMessage.classList.add(messageClass);
+    chatContent.appendChild(chatMessage);
     chatContent.scrollTop = chatContent.scrollHeight;
 }
