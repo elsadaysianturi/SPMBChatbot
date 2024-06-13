@@ -10,4 +10,3 @@ class Rules extends Model
 
     protected $fillable = ['keyword', 'response'];
 }
-
