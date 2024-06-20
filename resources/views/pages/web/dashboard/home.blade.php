@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-US">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -26,6 +27,7 @@
         }
     </style>
 </head>
+
 <body>
     <div class="wrap">
         <nav id="w0" class="navbar-inverse2 navbar-fixed-top navbar">
@@ -391,7 +393,10 @@
                 </div>
                 <div id="chatbot-container" class="chatbot-container">
                     <div class="chatbot-header">
-                        <h4>Chatbot SPMB IT Del</h4>
+                        <div class="logo-and-title">
+                            <img class="logodel" src="assets/images/logodel.jpg" alt="">
+                            <h4>Chatbot SPMB IT Del</h4>
+                        </div>
                         <div class="back-to-categories" onclick="backToCategories()">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-arrow-left">
                                 <line x1="19" y1="12" x2="5" y2="12"></line>

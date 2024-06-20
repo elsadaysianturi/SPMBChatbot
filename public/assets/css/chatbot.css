@@ -41,7 +41,7 @@
 .chatbot-header {
     background-color: #8e24aa;
     color: #fff;
-    padding: 15px;
+    padding: 11px;
     height: 60px;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -51,6 +51,16 @@
     align-items: center; /* Center items vertically */
 }
 
+.logo-and-title{
+    display: flex;
+    align-items: center;
+}
+
+.logodel{
+    width: 55px;
+    height: 55px;
+    padding: 10px;
+}
 .chatbot-header h4 {
     margin: 0;
 }
