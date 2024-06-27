@@ -46,10 +46,13 @@ class ChatbotController extends Controller
         }
 
         if (count($responses) > 0) {
-            return response()->json(['response' => implode(" ", $responses)]);
-        } else {
-            return response()->json(['response' => 'Maaf, saya tidak mengerti pertanyaan Anda.']);
+            $validResponses = $this->filterValidResponses($responses, $tokens);
+            if (count($validResponses) > 0) {
+                return response()->json(['response' => implode(" ", $validResponses)]);
+            }
         }
+
+        return response()->json(['response' => 'Maaf, saya tidak mengerti pertanyaan Anda.']);
     }
 
     private function normalizeAndStem($text)
@@ -67,5 +70,25 @@ class ChatbotController extends Controller
         $stemmedText = $this->stemmer->stem($text);
 
         return $stemmedText;
+    }
+
+    private function filterValidResponses($responses, $tokens)
+    {
+        $minMatchCount = 2; 
+        $validResponses = [];
+
+        foreach ($responses as $response) {
+            $matchCount = 0;
+            foreach ($tokens as $token) {
+                if (strpos($response, $token) !== false) {
+                    $matchCount++;
+                }
+            }
+            if ($matchCount >= $minMatchCount) {
+                $validResponses[] = $response;
+            }
+        }
+
+        return $validResponses;
     }
 }
