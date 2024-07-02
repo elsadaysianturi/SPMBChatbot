@@ -65,12 +65,12 @@ function displayQuestionButtons(questions) {
     var questionList = document.createElement("ul");
     questionList.classList.add("question-list");
 
-    questions.forEach(function (question) {
+    Object.keys(questions).forEach(function (id) {
         var listItem = document.createElement("li");
-        listItem.textContent = question.question;
+        listItem.textContent = questions[id];
         listItem.classList.add("question-button");
         listItem.onclick = function () {
-            processUserInput(question.question);
+            fetchAnswer(id);
         };
         questionList.appendChild(listItem);
     });

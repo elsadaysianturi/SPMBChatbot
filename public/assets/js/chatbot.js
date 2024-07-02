@@ -66,6 +66,7 @@ function displayMultiPartAnswer(answerParts) {
     });
     chatContent.scrollTop = chatContent.scrollHeight;
 }
+
 function sendMessage() {
     var userInput = document.getElementById("user-input").value;
 
@@ -81,12 +82,13 @@ function sendMessage() {
         },
         body: JSON.stringify({ message: userInput }),
     })
-        .then((response) => {
-            console.log("Raw response:", response);
-            return response.json(); 
-        })
+        .then((response) => response.json())
         .then((data) => {
-            displayMessage(data.response, "admin");
+            if (typeof data.response === "object") {
+                displayQuestionButtons(data.response);
+            } else {
+                displayMessage(data.response, "admin");
+            }
         })
         .catch((error) => {
             console.error("Error:", error);
@@ -112,4 +114,28 @@ function displayMessage(message, sender) {
     chatMessage.classList.add(messageClass);
     chatContent.appendChild(chatMessage);
     chatContent.scrollTop = chatContent.scrollHeight;
+}
+
+function fetchAnswer(pertanyaanId) {
+    fetch("/chatbot/jawaban", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "X-CSRF-TOKEN": document
+                .querySelector('meta[name="csrf-token"]')
+                .getAttribute("content"),
+        },
+        body: JSON.stringify({ pertanyaan_id: pertanyaanId }),
+    })
+        .then((response) => response.json())
+        .then((data) => {
+            displayMessage(data.response, "admin");
+        })
+        .catch((error) => {
+            console.error("Error:", error);
+            displayMessage(
+                "Terjadi kesalahan. Silakan coba lagi nanti.",
+                "admin"
+            );
+        });
 }
