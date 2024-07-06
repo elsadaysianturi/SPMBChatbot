@@ -47,13 +47,14 @@ document
         backToCategories();
     });
 
-function backToCategories() {
-    document.getElementById("chat-input").style.display = "none";
-    document.getElementById("categories").style.display = "block";
+function resetChatbot() {
+    document.getElementById("questions-list").innerHTML = "";
+    document.getElementById("answer-content").innerHTML = "";
+    document.getElementById("user-input").value = "";
 }
-
 function closeChatbot() {
-    chatbotContainer.style.display = "none";
+    resetChatbot();
+    document.getElementById("chatbot-container").style.display = "none";
 }
 
 function displayMultiPartAnswer(answerParts) {

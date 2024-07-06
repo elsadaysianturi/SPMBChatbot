@@ -183,3 +183,41 @@
 #questions-list li:hover {
     background-color: #f0f0f0;
 }
+
+
+.profile-circle {
+    width: 24px; /* Adjust size as needed */
+    height: 24px; /* Adjust size as needed */
+    border-radius: 50%;
+    background-color: purple;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 8px; /* Space between profile and text */
+}
+
+.answer-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px; /* Adjust spacing between answers */
+}
+
+.answer-text {
+    flex: 1;
+}
+
+.answer-text strong {
+    display: none;
+    margin-bottom: 5px;
+}
+
+.answer-text p {
+    margin: 0;
+    padding: 10px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    border: 1px solid #ccc;
+}
+

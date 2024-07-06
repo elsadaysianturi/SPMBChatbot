@@ -425,7 +425,7 @@
                         <div id="answers" class="answers" style="display:none;">
                             <div id="answer-content"></div>
                         </div>
-                        <div id="chat-input" class="chat-input">
+                        <div id="chat-input" class="chat-input" style="display:block;">
                             <input type="text" id="user-input" placeholder="Ketik pesan Anda...">
                             <button onclick="sendMessage()">Kirim</button>
                         </div>
@@ -521,8 +521,36 @@
                         .then(response => response.json())
                         .then(data => {
                             let answerContent = document.getElementById('answer-content');
-                            answerContent.innerHTML = `<p><strong>Jawaban:</strong> ${data.jawaban}</p>`;
+                            // Clear previous content
+                            answerContent.innerHTML = "";
 
+                            // Create container for answer
+                            let answerContainer = document.createElement("div");
+                            answerContainer.className = "answer-container";
+
+                            // Create profile circle for "C"
+                            let profileCircle = document.createElement("div");
+                            profileCircle.className = "profile-circle";
+                            profileCircle.textContent = "C";
+
+                            // Create answer text
+                            let answerText = document.createElement("div");
+                            answerText.className = "answer-text";
+                            let strongTag = document.createElement("strong");
+                            strongTag.textContent = "";
+                            let answerParagraph = document.createElement("p");
+                            answerParagraph.textContent = data.jawaban;
+                            answerText.appendChild(strongTag);
+                            answerText.appendChild(answerParagraph);
+
+                            // Append elements to answer container
+                            answerContainer.appendChild(profileCircle);
+                            answerContainer.appendChild(answerText);
+
+                            // Append answer container to answer content
+                            answerContent.appendChild(answerContainer);
+
+                            // Show answers section and hide questions section
                             document.getElementById('questions').style.display = 'none';
                             document.getElementById('answers').style.display = 'block';
                         });
@@ -545,12 +573,13 @@
                     document.getElementById('questions').style.display = 'none';
                     document.getElementById('answers').style.display = 'none';
                     document.getElementById('categories').style.display = 'block';
+                    document.getElementById('chat-input').style.display = 'block';
                 }
 
                 function resetChatbot() {
                     document.getElementById('questions-list').innerHTML = '';
                     document.getElementById('answer-content').innerHTML = '';
-                    document.getElementById('chat-input').style.display = 'none';
+                    document.getElementById('user-input').value = '';
                 }
             </script>
             <footer class="footer">

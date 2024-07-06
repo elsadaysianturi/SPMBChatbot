@@ -6,14 +6,14 @@ var cssStyles = `
 }
 
 .user-message p {
-    background-color: #808080;
+    background-color: #8e24aa;
     color: white ;
     float: right;
     border-top-right-radius: 0;
 }
 
 .admin-message p {
-    background-color: #f0f0f0;
+    background-color: #f3f3f3;
     color: #333;
     float: left;
     border-top-left-radius: 0;
@@ -27,13 +27,26 @@ var cssStyles = `
     max-width: 70%;
 }
 
+.profile-circle {
+    width: 24px; /* Adjust size as needed */
+    height: 24px; /* Adjust size as needed */
+    border-radius: 50%;
+    background-color: purple;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 8px; /* Space between profile and text */
+}
+
 `;
 styleElement.appendChild(document.createTextNode(cssStyles));
 document.head.appendChild(styleElement);
 
 function selectCategory(category) {
     document.getElementById("categories").style.display = "none";
-    document.getElementById("chat-input").style.display = "inline-flex";
+    document.getElementById("chat-input").style.display = "block";
     var message;
     switch (category) {
         case "Seleksi":
@@ -112,14 +125,25 @@ function displayMessage(message, sender) {
     chatMessage.className = "chat-message";
 
     var messageClass = sender === "user" ? "user-message" : "admin-message";
-
-    chatMessage.innerHTML =
-        "<p><strong>" +
-        (sender === "user" ? "You" : "Admin") +
-        ": </strong>" +
-        message +
-        "</p>";
     chatMessage.classList.add(messageClass);
+
+    if (sender === "admin") {
+        chatMessage.style.display = "flex";
+        chatMessage.style.alignItems = "center";
+
+        var profileCircle = document.createElement("div");
+        profileCircle.classList.add("profile-circle");
+        profileCircle.textContent = "C";
+
+        var messageText = document.createElement("p");
+        messageText.textContent = message;
+
+        chatMessage.appendChild(profileCircle);
+        chatMessage.appendChild(messageText);
+    } else {
+        chatMessage.innerHTML = "<p><strong></strong>" + message + "</p>";
+    }
+
     chatContent.appendChild(chatMessage);
     chatContent.scrollTop = chatContent.scrollHeight;
 }
