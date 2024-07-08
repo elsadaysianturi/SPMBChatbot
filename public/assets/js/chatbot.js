@@ -47,13 +47,7 @@ document
         backToCategories();
     });
 
-function resetChatbot() {
-    document.getElementById("questions-list").innerHTML = "";
-    document.getElementById("answer-content").innerHTML = "";
-    document.getElementById("user-input").value = "";
-}
 function closeChatbot() {
-    resetChatbot();
     document.getElementById("chatbot-container").style.display = "none";
 }
 

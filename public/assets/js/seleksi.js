@@ -33,7 +33,6 @@ var cssStyles = `
     border-radius: 50%;
     background-color: purple;
     color: white;
-    display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
