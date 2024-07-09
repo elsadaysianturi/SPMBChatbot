@@ -425,96 +425,98 @@
                         <div id="answers" class="answers" style="display:none;">
                             <div id="answer-content"></div>
                         </div>
-                        <div id="chat-input" class="chat-input" style="display:block;">
-                            <input type="text" id="user-input" placeholder="Ketik pesan Anda...">
-                            <button onclick="sendMessage()">Kirim</button>
-                        </div>
+                    </div>
+                    <div id="chat-input" class="chat-input" >
+                        <input type="text" id="user-input" placeholder="Ketik pesan Anda..." required>
+                        <button onclick="sendMessage()"><i class="bi bi-send"></i>Kirim</button>
                     </div>
                 </div>
+
             </div>
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    fetch('/categories')
-                        .then(response => response.json())
-                        .then(data => {
-                            let categoriesList = document.getElementById('categories-list');
-                            data.forEach(category => {
-                                let listItem = document.createElement('li');
-                                listItem.setAttribute('data-kategori-id', category.id);
-                                listItem.innerText = category.nama_kategori;
-                                listItem.addEventListener('click', function() {
-                                    if (category.nama_kategori.toLowerCase() === 'program studi') {
-                                        loadProgramStudi();
-                                    } else {
-                                        loadQuestions(category.id);
-                                    }
-                                });
-                                categoriesList.appendChild(listItem);
+        </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                fetch('/categories')
+                    .then(response => response.json())
+                    .then(data => {
+                        let categoriesList = document.getElementById('categories-list');
+                        data.forEach(category => {
+                            let listItem = document.createElement('li');
+                            listItem.setAttribute('data-kategori-id', category.id);
+                            listItem.innerText = category.nama_kategori;
+                            listItem.addEventListener('click', function() {
+                                if (category.nama_kategori.toLowerCase() === 'program studi') {
+                                    loadProgramStudi();
+                                } else {
+                                    loadQuestions(category.id);
+                                }
                             });
+                            categoriesList.appendChild(listItem);
+                        });
+                    });
+
+                fetch('/program-studi')
+                    .then(response => response.json())
+                    .then(data => {
+                        let programsList = document.getElementById('programs-list');
+                        data.forEach(program => {
+                            let listItem = document.createElement('li');
+                            listItem.setAttribute('data-program-id', program.id);
+                            listItem.innerText = program.nama_programstudi;
+                            listItem.addEventListener('click', function() {
+                                loadProgramQuestions(program.id);
+                            });
+                            programsList.appendChild(listItem);
+                        });
+                    });
+            });
+
+            function loadProgramStudi() {
+                document.getElementById('categories').style.display = 'none';
+                document.getElementById('programs').style.display = 'block';
+            }
+
+            function loadQuestions(categoryId) {
+                fetch(`/categories/${categoryId}/questions`)
+                    .then(response => response.json())
+                    .then(data => {
+                        let questionsList = document.getElementById('questions-list');
+                        questionsList.innerHTML = '';
+                        data.forEach(question => {
+                            let questionItem = document.createElement('li');
+                            questionItem.setAttribute('data-pertanyaan-id', question.id);
+                            questionItem.innerText = question.pertanyaan;
+                            questionItem.addEventListener('click', function() {
+                                loadAnswer(question.id);
+                            });
+                            questionsList.appendChild(questionItem);
                         });
 
-                    fetch('/program-studi')
-                        .then(response => response.json())
-                        .then(data => {
-                            let programsList = document.getElementById('programs-list');
-                            data.forEach(program => {
-                                let listItem = document.createElement('li');
-                                listItem.setAttribute('data-program-id', program.id);
-                                listItem.innerText = program.nama_programstudi;
-                                listItem.addEventListener('click', function() {
-                                    loadProgramQuestions(program.id);
-                                });
-                                programsList.appendChild(listItem);
+                        document.getElementById('categories').style.display = 'none';
+                        document.getElementById('questions').style.display = 'block';
+                    });
+            }
+
+            function loadProgramQuestions(programId) {
+                fetch(`/program-studi/${programId}/questions`)
+                    .then(response => response.json())
+                    .then(data => {
+                        let questionsList = document.getElementById('questions-list');
+                        questionsList.innerHTML = '';
+                        data.forEach(question => {
+                            let questionItem = document.createElement('li');
+                            questionItem.setAttribute('data-pertanyaan-id', question.id);
+                            questionItem.innerText = question.pertanyaan;
+                            questionItem.addEventListener('click', function() {
+                                loadProgramAnswer(question.id);
                             });
+                            questionsList.appendChild(questionItem);
                         });
-                });
 
-                function loadProgramStudi() {
-                    document.getElementById('categories').style.display = 'none';
-                    document.getElementById('programs').style.display = 'block';
-                }
-
-                function loadQuestions(categoryId) {
-                    fetch(`/categories/${categoryId}/questions`)
-                        .then(response => response.json())
-                        .then(data => {
-                            let questionsList = document.getElementById('questions-list');
-                            questionsList.innerHTML = '';
-                            data.forEach(question => {
-                                let questionItem = document.createElement('li');
-                                questionItem.setAttribute('data-pertanyaan-id', question.id);
-                                questionItem.innerText = question.pertanyaan;
-                                questionItem.addEventListener('click', function() {
-                                    loadAnswer(question.id);
-                                });
-                                questionsList.appendChild(questionItem);
-                            });
-
-                            document.getElementById('categories').style.display = 'none';
-                            document.getElementById('questions').style.display = 'block';
-                        });
-                }
-
-                function loadProgramQuestions(programId) {
-                    fetch(`/program-studi/${programId}/questions`)
-                        .then(response => response.json())
-                        .then(data => {
-                            let questionsList = document.getElementById('questions-list');
-                            questionsList.innerHTML = '';
-                            data.forEach(question => {
-                                let questionItem = document.createElement('li');
-                                questionItem.setAttribute('data-pertanyaan-id', question.id);
-                                questionItem.innerText = question.pertanyaan;
-                                questionItem.addEventListener('click', function() {
-                                    loadProgramAnswer(question.id);
-                                });
-                                questionsList.appendChild(questionItem);
-                            });
-
-                            document.getElementById('programs').style.display = 'none';
-                            document.getElementById('questions').style.display = 'block';
-                        });
-                }
+                        document.getElementById('programs').style.display = 'none';
+                        document.getElementById('questions').style.display = 'block';
+                    });
+            }
 
                 function loadAnswer(questionId) {
                     fetch(`/questions/${questionId}/answer`)
@@ -556,79 +558,79 @@
                         });
                 }
 
-                function loadProgramAnswer(questionId) {
-                    fetch(`/program-studi-questions/${questionId}/answer`)
-                        .then(response => response.json())
-                        .then(data => {
-                            let answerContent = document.getElementById('answer-content');
-                            answerContent.innerHTML = `<p><strong>Jawaban:</strong> ${data.jawaban}</p>`;
+            function loadProgramAnswer(questionId) {
+                fetch(`/program-studi-questions/${questionId}/answer`)
+                    .then(response => response.json())
+                    .then(data => {
+                        let answerContent = document.getElementById('answer-content');
+                        answerContent.innerHTML = `<p><strong>Jawaban:</strong> ${data.jawaban}</p>`;
 
-                            document.getElementById('questions').style.display = 'none';
-                            document.getElementById('answers').style.display = 'block';
-                        });
-                }
+                        document.getElementById('questions').style.display = 'none';
+                        document.getElementById('answers').style.display = 'block';
+                    });
+            }
 
-                function backToCategories() {
-                    resetChatbot();
-                    document.getElementById('questions').style.display = 'none';
-                    document.getElementById('answers').style.display = 'none';
-                    document.getElementById('categories').style.display = 'block';
-                    document.getElementById('chat-input').style.display = 'block';
-                }
+            function backToCategories() {
+                resetChatbot();
+                document.getElementById('questions').style.display = 'none';
+                document.getElementById('answers').style.display = 'none';
+                document.getElementById('categories').style.display = 'block';
+                document.getElementById('chat-input').style.display = 'block';
+            }
 
-                function resetChatbot() {
-                    document.getElementById('questions-list').innerHTML = '';
-                    document.getElementById('answer-content').innerHTML = '';
-                    document.getElementById('user-input').value = '';
-                }
-            </script>
-            <footer class="footer">
-                <div class="container">
-                    <footer class="site-footer">
-                        <div class="container">
-                            <div class="row">
-                                <hr>
-                                <p class="pull-left" style="color: #004D40">&copy; <b>SPMB Institut Teknologi Del 2024</b></p>
-                                <p class="pull-right"><img src="/assets/images/logo_del.png" height="60" width="60"></p>
-                                <p class="pull-right"><img src="/assets/images/yayasandel.jpg" height="60" width="60"></p>
-                                <p class="pull-right"><img src="/assets/images/smaungguldel.jpg" height="60" width="60"></p>
-                                </hr>
-                            </div>
+            function resetChatbot() {
+                document.getElementById('questions-list').innerHTML = '';
+                document.getElementById('answer-content').innerHTML = '';
+                document.getElementById('user-input').value = '';
+            }
+        </script>
+        <footer class="footer">
+            <div class="container">
+                <footer class="site-footer">
+                    <div class="container">
+                        <div class="row">
+                            <hr>
+                            <p class="pull-left" style="color: #004D40">&copy; <b>SPMB Institut Teknologi Del 2024</b></p>
+                            <p class="pull-right"><img src="/assets/images/logo_del.png" height="60" width="60"></p>
+                            <p class="pull-right"><img src="/assets/images/yayasandel.jpg" height="60" width="60"></p>
+                            <p class="pull-right"><img src="/assets/images/smaungguldel.jpg" height="60" width="60"></p>
+                            </hr>
                         </div>
-                    </footer>
-                </div>
-            </footer>
-            <script src="assets/js/chatbot.js"></script>
-            <script src="assets/js/seleksi.js"></script>
-            <script src="assets/js/slideshow.js"></script>
-            <script>
-                document.getElementById("info-pendaftaran").addEventListener("click", function(event) {
-                    event.preventDefault();
-                    document.getElementById("dropdown-info").classList.toggle("show");
-                });
-                document.getElementById("menu-berita").addEventListener("click", function(event) {
-                    event.preventDefault();
-                    document.getElementById("dropdown-berita").classList.toggle("show");
-                });
-                document.getElementById("menu-login").addEventListener("click", function(event) {
-                    event.preventDefault();
-                    document.getElementById("dropdown-login").classList.toggle("show");
-                });
-                window.onclick = function(event) {
-                    if (!event.target.matches('.dropdown-toggle')) {
-                        var dropdowns = document.getElementsByClassName("dropdown-menu");
-                        for (var i = 0; i < dropdowns.length; i++) {
-                            var openDropdown = dropdowns[i];
-                            if (openDropdown.classList.contains('show')) {
-                                openDropdown.classList.remove('show');
-                            }
+                    </div>
+                </footer>
+            </div>
+        </footer>
+        <script src="assets/js/chatbot.js"></script>
+        <script src="assets/js/seleksi.js"></script>
+        <script src="assets/js/slideshow.js"></script>
+        <script>
+            document.getElementById("info-pendaftaran").addEventListener("click", function(event) {
+                event.preventDefault();
+                document.getElementById("dropdown-info").classList.toggle("show");
+            });
+            document.getElementById("menu-berita").addEventListener("click", function(event) {
+                event.preventDefault();
+                document.getElementById("dropdown-berita").classList.toggle("show");
+            });
+            document.getElementById("menu-login").addEventListener("click", function(event) {
+                event.preventDefault();
+                document.getElementById("dropdown-login").classList.toggle("show");
+            });
+            window.onclick = function(event) {
+                if (!event.target.matches('.dropdown-toggle')) {
+                    var dropdowns = document.getElementsByClassName("dropdown-menu");
+                    for (var i = 0; i < dropdowns.length; i++) {
+                        var openDropdown = dropdowns[i];
+                        if (openDropdown.classList.contains('show')) {
+                            openDropdown.classList.remove('show');
                         }
                     }
                 }
-            </script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-            <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
-        </div>
+            }
+        </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js"></script>
+    </div>
     </div>
 </body>
 
