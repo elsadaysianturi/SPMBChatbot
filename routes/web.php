@@ -21,12 +21,12 @@ use App\Http\Controllers\ChatbotController;
 Route::get('/', function () {
     return view('pages.web.dashboard.home');
 });
-Route::get('/', [KategoriController::class, 'index']);
+Route::get('/categories', [KategoriController::class, 'index']);
 Route::get('/categories', [PertanyaanJawabanController::class, 'getCategories']);
 Route::get('/categories/{id}/questions', [PertanyaanJawabanController::class, 'getQuestionsByCategory']);
-Route::get('/questions/{id}/answer', [PertanyaanJawabanController::class, 'getAnswerByQuestionId']);
 Route::get('/program-studi', [ProgramStudiController::class, 'index']);
 Route::get('/program-studi/{id}/questions', [PertanyaanjawabanProgramstudiController::class, 'getQuestionsByProgramStudi']);
+Route::get('/questions/{id}/answer', [PertanyaanJawabanController::class, 'getAnswerByQuestionId']);
 Route::get('/program-studi-questions/{id}/answer', [PertanyaanjawabanProgramstudiController::class, 'getAnswerByQuestionId']);
 Route::post('/chatbot/message', [ChatbotController::class, 'handleUserInput']);
 Route::post('/chatbot/jawaban', [ChatbotController::class, 'getJawabanByPertanyaanId']);

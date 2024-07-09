@@ -1,6 +1,7 @@
 var chatbotButton = document.getElementById("chatbot-button");
 var chatbotContainer = document.getElementById("chatbot-container");
 var closeChatbotButton = document.querySelector(".close-chatbot");
+var displayedAnswers = [];
 
 chatbotButton.addEventListener("mouseenter", function () {
     if (
@@ -47,6 +48,11 @@ document
         backToCategories();
     });
 
+function resetChatbot() {
+    document.getElementById("questions-list").innerHTML = "";
+    document.getElementById("answer-content").innerHTML = "";
+    document.getElementById("user-input").value = "";
+}
 function closeChatbot() {
     document.getElementById("chatbot-container").style.display = "none";
 }
@@ -54,11 +60,28 @@ function closeChatbot() {
 function displayMultiPartAnswer(answerParts) {
     var chatContent = document.getElementById("chatbot-content");
     answerParts.forEach(function (part) {
+        if (displayedAnswers.includes(part)) {
+            console.log("Duplicate part detected: ", part);
+            return;
+        }
+        displayedAnswers.push(part);
+
         var chatMessage = document.createElement("div");
-        chatMessage.className = "chat-message";
-        chatMessage.innerHTML = "<p><strong>Admin: </strong>" + part + "</p>";
+        chatMessage.className = "chat-message admin-message";
+
+        var profileCircle = document.createElement("div");
+        profileCircle.className = "profile-circle";
+        profileCircle.textContent = "C";
+
+        var messageText = document.createElement("p");
+        messageText.textContent = part;
+
+        chatMessage.appendChild(profileCircle);
+        chatMessage.appendChild(messageText);
+
         chatContent.appendChild(chatMessage);
     });
+
     chatContent.scrollTop = chatContent.scrollHeight;
 }
 
@@ -96,19 +119,21 @@ function sendMessage() {
     document.getElementById("user-input").value = "";
 }
 
-function displayMessage(message, sender) {
-    var chatContent = document.getElementById("chatbot-content");
-    var chatMessage = document.createElement("div");
-    chatMessage.className = "chat-message";
+function displayQuestionButtons(questions) {
+    var questionList = document.createElement("ul");
+    questionList.classList.add("question-list");
 
-    var messageClass = sender === "user" ? "user-message" : "admin-message";
+    Object.keys(questions).forEach(function (id) {
+        var listItem = document.createElement("li");
+        listItem.textContent = questions[id];
+        listItem.classList.add("question-button");
+        listItem.onclick = function () {
+            fetchAnswer(id);
+        };
+        questionList.appendChild(listItem);
+    });
 
-    chatMessage.innerHTML = `<p><strong>${
-        sender === "user" ? "You" : "Admin"
-    }: </strong>${message}</p>`;
-    chatMessage.classList.add(messageClass);
-    chatContent.appendChild(chatMessage);
-    chatContent.scrollTop = chatContent.scrollHeight;
+    document.getElementById("chatbot-content").appendChild(questionList);
 }
 
 function fetchAnswer(pertanyaanId) {
@@ -124,7 +149,11 @@ function fetchAnswer(pertanyaanId) {
     })
         .then((response) => response.json())
         .then((data) => {
-            displayMessage(data.response, "admin");
+            if (typeof data.response === "string") {
+                displayMessage(data.response, "admin");
+            } else {
+                displayMessage("Tidak ada jawaban yang tersedia.", "admin");
+            }
         })
         .catch((error) => {
             console.error("Error:", error);
@@ -133,4 +162,35 @@ function fetchAnswer(pertanyaanId) {
                 "admin"
             );
         });
+}
+
+function displayMessage(message, sender) {
+    if (displayedAnswers.includes(message)) {
+        console.log("Duplicate message detected: ", message);
+        return;
+    }
+    displayedAnswers.push(message);
+
+    var chatContent = document.getElementById("chatbot-content");
+    var chatMessage = document.createElement("div");
+    chatMessage.className = "chat-message";
+
+    if (sender === "admin") {
+        var profileCircle = document.createElement("div");
+        profileCircle.className = "profile-circle";
+        profileCircle.textContent = "C";
+
+        var messageText = document.createElement("p");
+        messageText.textContent = message;
+
+        chatMessage.appendChild(profileCircle);
+        chatMessage.appendChild(messageText);
+        chatMessage.classList.add("admin-message");
+    } else {
+        chatMessage.innerHTML = "<p><strong></strong>" + message + "</p>";
+        chatMessage.classList.add("user-message");
+    }
+
+    chatContent.appendChild(chatMessage);
+    chatContent.scrollTop = chatContent.scrollHeight;
 }

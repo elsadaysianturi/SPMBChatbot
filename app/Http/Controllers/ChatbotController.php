@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -22,7 +23,13 @@ class ChatbotController extends Controller
         $userInput = $request->input('message');
         $normalizedInput = $this->normalizeAndStem($userInput);
         \Log::info('Normalized Input: ' . $normalizedInput);
-    
+
+        $keywords = ['institut', 'teknologi', 'del', 'institut teknologi del', 'spmb', 'mahasiswa', 'beasiswa', 'asrama'];
+        if (in_array($normalizedInput, $keywords)) {
+            \Log::info('Keyword match found: ' . $normalizedInput);
+            return $this->getQuestionsByKeywords($normalizedInput);
+        }
+        
         $kategori = Kategori::where('nama_kategori', 'LIKE', '%' . $normalizedInput . '%')->first();
         if ($kategori) {
             \Log::info('Kategori Ditemukan: ' . $kategori->nama_kategori);
@@ -36,7 +43,7 @@ class ChatbotController extends Controller
         }
     
         $tokens = explode(' ', $normalizedInput);
-        \Log::info('Tokens: ', $tokens);
+        \Log::info('Tokens: ' . json_encode($tokens));
     
         if (count($tokens) < 1) {
             return response()->json(['response' => 'Maaf, pertanyaan Anda terlalu pendek.']);
@@ -73,7 +80,7 @@ class ChatbotController extends Controller
         $stopWords = ['dan', 'di', 'ke', 'dari', 'yang', 'untuk'];
         $words = explode(' ', $text);
         $filteredWords = array_diff($words, $stopWords);
-        \Log::info('Filtered Words: ', $filteredWords);
+        \Log::info('Filtered Words: ' . json_encode($filteredWords));
     
         $text = implode(' ', $filteredWords);
         \Log::info('After Stop Words Removal: ' . $text);
@@ -84,27 +91,23 @@ class ChatbotController extends Controller
         return $stemmedText;
     }
     
-
     private function filterValidResponses($responses, $tokens)
     {
-        $minMatchCount = 2; 
         $validResponses = [];
-
+    
         foreach ($responses as $response) {
-            $matchCount = 0;
-            foreach ($tokens as $token) {
-                if (strpos($response, $token) !== false) {
-                    $matchCount++;
-                }
-            }
-            if ($matchCount >= $minMatchCount) {
+            $responseTokens = explode(' ', $response);
+            
+            $matchCount = count(array_intersect($responseTokens, $tokens));
+            
+            if ($matchCount > 0) {
                 $validResponses[] = $response;
             }
         }
-
+    
         return $validResponses;
     }
-
+    
     public function getPertanyaanByKategori($kategoriId)
     {
         $pertanyaan = PertanyaanJawaban::where('kategori_id', $kategoriId)->get();
@@ -115,7 +118,35 @@ class ChatbotController extends Controller
     public function getJawabanByPertanyaanId(Request $request)
     {
         $pertanyaanId = $request->input('pertanyaan_id');
-        $jawaban = PertanyaanJawaban::find($pertanyaanId)->jawaban;
-        return response()->json(['response' => $jawaban]);
+        
+        $jawaban = PertanyaanJawaban::find($pertanyaanId);
+        
+        if ($jawaban) {
+            return response()->json(['response' => $jawaban->jawaban]);
+        }
+    
+        $jawabanProgramStudi = \DB::table('pertanyaanjawaban_programstudi')->where('id', $pertanyaanId)->first();
+        
+        if ($jawabanProgramStudi) {
+            return response()->json(['response' => $jawabanProgramStudi->jawaban]);
+        }
+    
+        return response()->json(['response' => 'Maaf, jawaban tidak ditemukan.']);
+    }    
+    
+    public function getQuestionsByKeywords($keyword)
+    {
+        \Log::info('Fetching questions for keyword: ' . $keyword);
+        
+        $pertanyaan1 = \DB::table('pertanyaan_jawaban')->where('pertanyaan', 'LIKE', '%' . $keyword . '%')->pluck('pertanyaan', 'id')->toArray();
+        \Log::info('Pertanyaan 1: ' . json_encode($pertanyaan1));
+        
+        $pertanyaan2 = \DB::table('pertanyaanjawaban_programstudi')->where('pertanyaan', 'LIKE', '%' . $keyword . '%')->pluck('pertanyaan', 'id')->toArray();
+        \Log::info('Pertanyaan 2: ' . json_encode($pertanyaan2));
+        
+        $allPertanyaan = array_merge($pertanyaan1, $pertanyaan2);
+        \Log::info('All Pertanyaan: ' . json_encode($allPertanyaan));
+        
+        return response()->json(['response' => $allPertanyaan]);
     }
 }

@@ -518,45 +518,45 @@
                     });
             }
 
-            function loadAnswer(questionId) {
-                fetch(`/questions/${questionId}/answer`)
-                    .then(response => response.json())
-                    .then(data => {
-                        let answerContent = document.getElementById('answer-content');
-                        // Clear previous content
-                        answerContent.innerHTML = "";
+                function loadAnswer(questionId) {
+                    fetch(`/questions/${questionId}/answer`)
+                        .then(response => response.json())
+                        .then(data => {
+                            let answerContent = document.getElementById('answer-content');
+                            // Clear previous content
+                            answerContent.innerHTML = "";
 
-                        // Create container for answer
-                        let answerContainer = document.createElement("div");
-                        answerContainer.className = "answer-container";
+                            // Create container for answer
+                            let answerContainer = document.createElement("div");
+                            answerContainer.className = "answer-container";
 
-                        // Create profile circle for "C"
-                        let profileCircle = document.createElement("div");
-                        profileCircle.className = "profile-circle";
-                        profileCircle.textContent = "C";
+                            // Create profile circle for "C"
+                            let profileCircle = document.createElement("div");
+                            profileCircle.className = "profile-circle";
+                            profileCircle.textContent = "C";
 
-                        // Create answer text
-                        let answerText = document.createElement("div");
-                        answerText.className = "answer-text";
-                        let strongTag = document.createElement("strong");
-                        strongTag.textContent = "";
-                        let answerParagraph = document.createElement("p");
-                        answerParagraph.textContent = data.jawaban;
-                        answerText.appendChild(strongTag);
-                        answerText.appendChild(answerParagraph);
+                            // Create answer text
+                            let answerText = document.createElement("div");
+                            answerText.className = "answer-text";
+                            let strongTag = document.createElement("strong");
+                            strongTag.textContent = "";
+                            let answerParagraph = document.createElement("p");
+                            answerParagraph.textContent = data.jawaban;
+                            answerText.appendChild(strongTag);
+                            answerText.appendChild(answerParagraph);
 
-                        // Append elements to answer container
-                        answerContainer.appendChild(profileCircle);
-                        answerContainer.appendChild(answerText);
+                            // Append elements to answer container
+                            answerContainer.appendChild(profileCircle);
+                            answerContainer.appendChild(answerText);
 
-                        // Append answer container to answer content
-                        answerContent.appendChild(answerContainer);
+                            // Append answer container to answer content
+                            answerContent.appendChild(answerContainer);
 
-                        // Show answers section and hide questions section
-                        document.getElementById('questions').style.display = 'none';
-                        document.getElementById('answers').style.display = 'block';
-                    });
-            }
+                            // Show answers section and hide questions section
+                            document.getElementById('questions').style.display = 'none';
+                            document.getElementById('answers').style.display = 'block';
+                        });
+                }
 
             function loadProgramAnswer(questionId) {
                 fetch(`/program-studi-questions/${questionId}/answer`)
