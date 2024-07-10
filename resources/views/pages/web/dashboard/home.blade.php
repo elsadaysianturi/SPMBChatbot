@@ -15,17 +15,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <style>
-        .chat-input {
-            display: flex;
-            align-items: center;
-        }
-
-        .chat-input input[type="text"] {
-            flex: 1;
-            margin-right: 10px;
-        }
-    </style>
 </head>
 
 <body>
@@ -426,10 +415,13 @@
                             <div id="answer-content"></div>
                         </div>
                     </div>
-                    <div id="chat-input" class="chat-input" >
+                    <div id="chat-input" class="chat-input">
                         <input type="text" id="user-input" placeholder="Ketik pesan Anda..." required>
-                        <button onclick="sendMessage()"><i class="bi bi-send"></i>Kirim</button>
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="#8e24aa" class="bi bi-send" viewBox="0 0 16 16" onclick="sendMessage()">
+                            <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
+                        </svg>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -453,6 +445,9 @@
                             categoriesList.appendChild(listItem);
                         });
                     });
+
+                let currentView = 'chatbot-container';
+                let previousView = '';
 
                 fetch('/program-studi')
                     .then(response => response.json())
@@ -494,6 +489,8 @@
 
                         document.getElementById('categories').style.display = 'none';
                         document.getElementById('questions').style.display = 'block';
+                        previousView = 'categories';
+                        currentView = 'questionsFromCategories';
                     });
             }
 
@@ -508,54 +505,51 @@
                             questionItem.setAttribute('data-pertanyaan-id', question.id);
                             questionItem.innerText = question.pertanyaan;
                             questionItem.addEventListener('click', function() {
-                                loadProgramAnswer(question.id);
+                                loadAnswer(question.id);
                             });
                             questionsList.appendChild(questionItem);
                         });
 
                         document.getElementById('programs').style.display = 'none';
                         document.getElementById('questions').style.display = 'block';
+                        previousView = 'programs';
+                        currentView = 'questionsFromPrograms';
                     });
             }
-            
+
             function loadAnswer(questionId) {
                 fetch(`/questions/${questionId}/answer`)
-                        .then(response => response.json())
-                        .then(data => {
-                            let answerContent = document.getElementById('answer-content');
-                            // Clear previous content
-                            answerContent.innerHTML = "";
+                    .then(response => response.json())
+                    .then(data => {
+                        let answerContent = document.getElementById('answer-content');
+                        answerContent.innerHTML = '';
 
-                            // Create container for answer
-                            let answerContainer = document.createElement("div");
-                            answerContainer.className = "answer-container";
+                        let answerContainer = document.createElement('div');
+                        answerContainer.className = 'answer-container';
 
-                            // Create profile circle for "C"
-                            let profileCircle = document.createElement("div");
-                            profileCircle.className = "profile-circle";
-                            profileCircle.textContent = "C";
+                        let profileCircle = document.createElement('div');
+                        profileCircle.className = 'profile-circle';
+                        profileCircle.textContent = 'C';
 
-                            // Create answer text
-                            let answerText = document.createElement("div");
-                            answerText.className = "answer-text";
-                            let strongTag = document.createElement("strong");
-                            strongTag.textContent = "";
-                            let answerParagraph = document.createElement("p");
-                            answerParagraph.textContent = data.jawaban;
-                            answerText.appendChild(strongTag);
-                            answerText.appendChild(answerParagraph);
+                        let answerText = document.createElement('div');
+                        answerText.className = 'answer-text';
+                        let strongTag = document.createElement('strong');
+                        strongTag.textContent = '';
+                        let answerParagraph = document.createElement('p');
+                        answerParagraph.textContent = data.jawaban;
+                        answerText.appendChild(strongTag);
+                        answerText.appendChild(answerParagraph);
 
-                            // Append elements to answer container
-                            answerContainer.appendChild(profileCircle);
-                            answerContainer.appendChild(answerText);
+                        answerContainer.appendChild(profileCircle);
+                        answerContainer.appendChild(answerText);
 
-                            // Append answer container to answer content
-                            answerContent.appendChild(answerContainer);
+                        answerContent.appendChild(answerContainer);
 
-                            // Show answers section and hide questions section
-                            document.getElementById('questions').style.display = 'none';
-                            document.getElementById('answers').style.display = 'block';
-                        });
+                        document.getElementById('questions').style.display = 'none';
+                        document.getElementById('answers').style.display = 'block';
+                        previousView = currentView;
+                        currentView = 'answers';
+                    });
             }
 
             function loadProgramAnswer(questionId) {
@@ -568,20 +562,34 @@
                         document.getElementById('questions').style.display = 'none';
                         document.getElementById('answers').style.display = 'block';
                     });
+
             }
+
 
             function backToCategories() {
-                resetChatbot();
-                document.getElementById('questions').style.display = 'none';
-                document.getElementById('answers').style.display = 'none';
-                document.getElementById('categories').style.display = 'block';
-                document.getElementById('chat-input').style.display = 'block';
-            }
+                let answers = document.getElementById('answers');
+                let questions = document.getElementById('questions');
+                let programs = document.getElementById('programs');
+                let categories = document.getElementById('categories');
 
-            function resetChatbot() {
-                document.getElementById('questions-list').innerHTML = '';
-                document.getElementById('answer-content').innerHTML = '';
-                document.getElementById('user-input').value = '';
+                if (currentView === 'answers') {
+                    answers.style.display = 'none';
+                    questions.style.display = 'block';
+                    currentView = previousView;
+                    previousView = 'answers';
+                } else if (currentView === 'questionsFromPrograms') {
+                    questions.style.display = 'none';
+                    programs.style.display = 'block';
+                    currentView = 'programs';
+                } else if (currentView === 'questionsFromCategories') {
+                    questions.style.display = 'none';
+                    categories.style.display = 'block';
+                    currentView = 'categories';
+                } else if (currentView === 'programs') {
+                    programs.style.display = 'none';
+                    categories.style.display = 'block';
+                    currentView = 'categories';
+                }
             }
         </script>
         <footer class="footer">

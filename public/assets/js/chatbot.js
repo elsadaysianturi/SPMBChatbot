@@ -49,14 +49,23 @@ document
         backToCategories();
     });
 
-function resetChatbot() {
-    document.getElementById("questions-list").innerHTML = "";
-    document.getElementById("answer-content").innerHTML = "";
-    document.getElementById("user-input").value = "";
-}
-
 function closeChatbot() {
     document.getElementById("chatbot-container").style.display = "none";
+    document.getElementById("programs").style.display = "none";
+
+    // Clear chat messages
+    let chatContent = document.getElementById("chatbot-content");
+    let messages = chatContent.querySelectorAll(".chat-message");
+    messages.forEach(message => {
+        chatContent.removeChild(message);
+    });
+
+    // Reset views
+    document.getElementById('categories').style.display = 'block';
+    document.getElementById('questions').style.display = 'none';
+    document.getElementById('answers').style.display = 'none';
+    currentView = 'categories';
+    previousView = '';
 }
 
 function displayMultiPartAnswer(answerParts) {

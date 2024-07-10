@@ -183,6 +183,33 @@
     background-color: #f0f0f0;
 }
 
+#programs {
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 10px;
+    margin-bottom: 20px;
+}
+
+#programs-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#programs-list li {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+
+#programs-list li:hover {
+    background-color: #f0f0f0;
+}
+
+
 .profile-circle {
     width: 24px;
     height: 24px;
@@ -249,4 +276,18 @@
     background-color: #f0f0f0;
     border-radius: 10px;
     border: 1px solid #ccc;
+}
+
+.chat-input svg {
+    width: 31px;
+    height: 31px; 
+    padding: 8px;
+    background-color: #f0f0f0; 
+    border-radius: 50%;
+    margin-top: 3.5px; 
+    cursor: pointer;
+}
+
+.chat-input svg:hover {
+    background-color: #b55ccb; /* Slightly darker gray on hover */
 }
