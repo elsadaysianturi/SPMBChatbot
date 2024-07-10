@@ -42,6 +42,7 @@ chatbotButton.onclick = function () {
         chatbotButton.innerHTML = closeIcon;
     }
 };
+
 document
     .querySelector(".back-to-categories")
     .addEventListener("click", function () {
@@ -53,6 +54,7 @@ function resetChatbot() {
     document.getElementById("answer-content").innerHTML = "";
     document.getElementById("user-input").value = "";
 }
+
 function closeChatbot() {
     document.getElementById("chatbot-container").style.display = "none";
 }
@@ -86,7 +88,12 @@ function displayMultiPartAnswer(answerParts) {
 }
 
 function sendMessage() {
-    var userInput = document.getElementById("user-input").value;
+    var userInput = document.getElementById("user-input").value.trim();
+    if (!userInput) {
+        displayMessage("Silakan masukkan pertanyaan Anda.", "admin");
+        return;
+    }
+    console.log(userInput);
 
     displayMessage(userInput, "user");
 
@@ -102,10 +109,18 @@ function sendMessage() {
     })
         .then((response) => response.json())
         .then((data) => {
-            if (typeof data.response === "object") {
-                displayQuestionButtons(data.response);
-            } else {
-                displayMessage(data.response, "admin");
+            if (data.response) {
+                if (Array.isArray(data.response)) {
+                    displayQuestionButtonsNew(data.response);
+                } else if (typeof data.response === "object") {
+                    const questions = Object.keys(data.response).map((key) => ({
+                        id: key,
+                        pertanyaan: data.response[key],
+                    }));
+                    displayQuestionButtonsNew(questions);
+                } else {
+                    displayMessage(data.response, "admin");
+                }
             }
         })
         .catch((error) => {
@@ -119,16 +134,20 @@ function sendMessage() {
     document.getElementById("user-input").value = "";
 }
 
-function displayQuestionButtons(questions) {
+function displayQuestionButtonsNew(questions) {
+    console.log(questions);
     var questionList = document.createElement("ul");
     questionList.classList.add("question-list");
 
-    Object.keys(questions).forEach(function (id) {
+    questions.forEach(function (question) {
         var listItem = document.createElement("li");
-        listItem.textContent = questions[id];
+        listItem.textContent = question.pertanyaan;
+
         listItem.classList.add("question-button");
+        listItem.setAttribute("data-pertanyaan-id", question.id);
+
         listItem.onclick = function () {
-            fetchAnswer(id);
+            fetchAnswer(question.id);
         };
         questionList.appendChild(listItem);
     });
@@ -165,6 +184,7 @@ function fetchAnswer(pertanyaanId) {
 }
 
 function displayMessage(message, sender) {
+    console.log(message);
     if (displayedAnswers.includes(message)) {
         console.log("Duplicate message detected: ", message);
         return;

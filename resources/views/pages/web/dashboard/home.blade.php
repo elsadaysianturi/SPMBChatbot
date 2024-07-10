@@ -431,7 +431,6 @@
                         <button onclick="sendMessage()"><i class="bi bi-send"></i>Kirim</button>
                     </div>
                 </div>
-
             </div>
         </div>
         <script>
@@ -482,6 +481,7 @@
                     .then(data => {
                         let questionsList = document.getElementById('questions-list');
                         questionsList.innerHTML = '';
+                        console.log(data);
                         data.forEach(question => {
                             let questionItem = document.createElement('li');
                             questionItem.setAttribute('data-pertanyaan-id', question.id);
@@ -517,9 +517,9 @@
                         document.getElementById('questions').style.display = 'block';
                     });
             }
-
-                function loadAnswer(questionId) {
-                    fetch(`/questions/${questionId}/answer`)
+            
+            function loadAnswer(questionId) {
+                fetch(`/questions/${questionId}/answer`)
                         .then(response => response.json())
                         .then(data => {
                             let answerContent = document.getElementById('answer-content');
@@ -556,7 +556,7 @@
                             document.getElementById('questions').style.display = 'none';
                             document.getElementById('answers').style.display = 'block';
                         });
-                }
+            }
 
             function loadProgramAnswer(questionId) {
                 fetch(`/program-studi-questions/${questionId}/answer`)

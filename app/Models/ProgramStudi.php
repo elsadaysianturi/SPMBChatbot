@@ -17,4 +17,9 @@ class ProgramStudi extends Model
     {
         return $this->hasMany(PertanyaanjawabanProgramstudi::class, 'programstudi_id');
     }
+    public function getProgramStudi()
+{
+    $programStudi = ProgramStudi::all(); // Adjust according to your model structure
+    return response()->json(['response' => $programStudi]);
+}
 }

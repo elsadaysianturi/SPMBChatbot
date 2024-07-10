@@ -21,10 +21,13 @@ class ChatbotController extends Controller
     public function handleUserInput(Request $request)
     {
         $userInput = $request->input('message');
+        if (empty($userInput)) {
+            return response()->json(['response' => 'Silakan masukkan pertanyaan Anda.']);
+        }
         $normalizedInput = $this->normalizeAndStem($userInput);
         \Log::info('Normalized Input: ' . $normalizedInput);
 
-        $keywords = ['institut', 'teknologi', 'del', 'institut teknologi del', 'spmb', 'mahasiswa', 'beasiswa', 'asrama'];
+        $keywords = ['institut', 'teknologi', 'del', 'institut teknologi del', 'spmb', 'mahasiswa', 'beasiswa', 'asrama',];
         if (in_array($normalizedInput, $keywords)) {
             \Log::info('Keyword match found: ' . $normalizedInput);
             return $this->getQuestionsByKeywords($normalizedInput);
@@ -138,15 +141,16 @@ class ChatbotController extends Controller
     {
         \Log::info('Fetching questions for keyword: ' . $keyword);
         
-        $pertanyaan1 = \DB::table('pertanyaan_jawaban')->where('pertanyaan', 'LIKE', '%' . $keyword . '%')->pluck('pertanyaan', 'id')->toArray();
+        $pertanyaan1 = \DB::table('pertanyaan_jawaban')->where('pertanyaan', 'LIKE', '%' . $keyword . '%')->select('pertanyaan', 'id')->get()->toArray();
         \Log::info('Pertanyaan 1: ' . json_encode($pertanyaan1));
         
-        $pertanyaan2 = \DB::table('pertanyaanjawaban_programstudi')->where('pertanyaan', 'LIKE', '%' . $keyword . '%')->pluck('pertanyaan', 'id')->toArray();
+        $pertanyaan2 = \DB::table('pertanyaanjawaban_programstudi')->where('pertanyaan', 'LIKE', '%' . $keyword . '%')->select('pertanyaan', 'id')->get()->toArray();
         \Log::info('Pertanyaan 2: ' . json_encode($pertanyaan2));
         
         $allPertanyaan = array_merge($pertanyaan1, $pertanyaan2);
         \Log::info('All Pertanyaan: ' . json_encode($allPertanyaan));
         
+       // dd($allPertanyaan);
         return response()->json(['response' => $allPertanyaan]);
     }
 }
