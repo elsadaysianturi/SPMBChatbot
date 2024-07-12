@@ -53,19 +53,17 @@ function closeChatbot() {
     document.getElementById("chatbot-container").style.display = "none";
     document.getElementById("programs").style.display = "none";
 
-    // Clear chat messages
     let chatContent = document.getElementById("chatbot-content");
     let messages = chatContent.querySelectorAll(".chat-message");
-    messages.forEach(message => {
+    messages.forEach((message) => {
         chatContent.removeChild(message);
     });
 
-    // Reset views
-    document.getElementById('categories').style.display = 'block';
-    document.getElementById('questions').style.display = 'none';
-    document.getElementById('answers').style.display = 'none';
-    currentView = 'categories';
-    previousView = '';
+    document.getElementById("categories").style.display = "block";
+    document.getElementById("questions").style.display = "none";
+    document.getElementById("answers").style.display = "none";
+    currentView = "categories";
+    previousView = "";
 }
 
 function displayMultiPartAnswer(answerParts) {
@@ -143,28 +141,9 @@ function sendMessage() {
     document.getElementById("user-input").value = "";
 }
 
-function displayQuestionButtonsNew(questions) {
-    console.log(questions);
-    var questionList = document.createElement("ul");
-    questionList.classList.add("question-list");
+function fetchAnswer(pertanyaanId, questionText) {
+    displayMessage(questionText, "user");
 
-    questions.forEach(function (question) {
-        var listItem = document.createElement("li");
-        listItem.textContent = question.pertanyaan;
-
-        listItem.classList.add("question-button");
-        listItem.setAttribute("data-pertanyaan-id", question.id);
-
-        listItem.onclick = function () {
-            fetchAnswer(question.id);
-        };
-        questionList.appendChild(listItem);
-    });
-
-    document.getElementById("chatbot-content").appendChild(questionList);
-}
-
-function fetchAnswer(pertanyaanId) {
     fetch("/chatbot/jawaban", {
         method: "POST",
         headers: {
@@ -190,6 +169,27 @@ function fetchAnswer(pertanyaanId) {
                 "admin"
             );
         });
+}
+
+function displayQuestionButtonsNew(questions) {
+    console.log(questions);
+    var questionList = document.createElement("ul");
+    questionList.classList.add("question-list");
+
+    questions.forEach(function (question) {
+        var listItem = document.createElement("li");
+        listItem.textContent = question.pertanyaan;
+
+        listItem.classList.add("question-button");
+        listItem.setAttribute("data-pertanyaan-id", question.id);
+
+        listItem.onclick = function () {
+            fetchAnswer(question.id, question.pertanyaan);
+        };
+        questionList.appendChild(listItem);
+    });
+
+    document.getElementById("chatbot-content").appendChild(questionList);
 }
 
 function displayMessage(message, sender) {

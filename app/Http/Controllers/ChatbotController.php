@@ -150,7 +150,6 @@ class ChatbotController extends Controller
         $allPertanyaan = array_merge($pertanyaan1, $pertanyaan2);
         \Log::info('All Pertanyaan: ' . json_encode($allPertanyaan));
         
-       // dd($allPertanyaan);
         return response()->json(['response' => $allPertanyaan]);
     }
 }

@@ -421,11 +421,13 @@
                             <path d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576zm6.787-8.201L1.591 6.602l4.339 2.76z" />
                         </svg>
                     </div>
-
                 </div>
             </div>
         </div>
-        <script>
+        {{-- <script>
+            let currentView = 'categories';
+            let previousView = '';
+        
             document.addEventListener('DOMContentLoaded', function() {
                 fetch('/categories')
                     .then(response => response.json())
@@ -445,10 +447,7 @@
                             categoriesList.appendChild(listItem);
                         });
                     });
-
-                let currentView = 'chatbot-container';
-                let previousView = '';
-
+        
                 fetch('/program-studi')
                     .then(response => response.json())
                     .then(data => {
@@ -464,36 +463,38 @@
                         });
                     });
             });
-
+        
             function loadProgramStudi() {
                 document.getElementById('categories').style.display = 'none';
                 document.getElementById('programs').style.display = 'block';
+                previousView = currentView;
+                currentView = 'programs';
             }
-
+        
             function loadQuestions(categoryId) {
                 fetch(`/categories/${categoryId}/questions`)
                     .then(response => response.json())
                     .then(data => {
                         let questionsList = document.getElementById('questions-list');
                         questionsList.innerHTML = '';
-                        console.log(data);
                         data.forEach(question => {
                             let questionItem = document.createElement('li');
                             questionItem.setAttribute('data-pertanyaan-id', question.id);
+                            questionItem.setAttribute('data-context', 'categories');
                             questionItem.innerText = question.pertanyaan;
                             questionItem.addEventListener('click', function() {
-                                loadAnswer(question.id);
+                                loadAnswer(question.id, 'categories', question.pertanyaan);
                             });
                             questionsList.appendChild(questionItem);
                         });
-
+        
                         document.getElementById('categories').style.display = 'none';
                         document.getElementById('questions').style.display = 'block';
-                        previousView = 'categories';
+                        previousView = currentView;
                         currentView = 'questionsFromCategories';
                     });
             }
-
+        
             function loadProgramQuestions(programId) {
                 fetch(`/program-studi/${programId}/questions`)
                     .then(response => response.json())
@@ -503,80 +504,79 @@
                         data.forEach(question => {
                             let questionItem = document.createElement('li');
                             questionItem.setAttribute('data-pertanyaan-id', question.id);
+                            questionItem.setAttribute('data-context', 'program-studi');
                             questionItem.innerText = question.pertanyaan;
                             questionItem.addEventListener('click', function() {
-                                loadAnswer(question.id);
+                                loadAnswer(question.id, 'program-studi', question.pertanyaan);
                             });
                             questionsList.appendChild(questionItem);
                         });
-
+        
                         document.getElementById('programs').style.display = 'none';
                         document.getElementById('questions').style.display = 'block';
-                        previousView = 'programs';
+                        previousView = currentView;
                         currentView = 'questionsFromPrograms';
                     });
             }
-
-            function loadAnswer(questionId) {
-                fetch(`/questions/${questionId}/answer`)
+        
+            function loadAnswer(questionId, context, questionText) {
+                let endpoint = context === 'categories' ? `/questions/${questionId}/answer` : `/program-studi-questions/${questionId}/answer`;
+                fetch(endpoint)
                     .then(response => response.json())
                     .then(data => {
                         let answerContent = document.getElementById('answer-content');
                         answerContent.innerHTML = '';
-
+        
                         let answerContainer = document.createElement('div');
                         answerContainer.className = 'answer-container';
-
+        
                         let profileCircle = document.createElement('div');
                         profileCircle.className = 'profile-circle';
                         profileCircle.textContent = 'C';
-
+        
                         let answerText = document.createElement('div');
                         answerText.className = 'answer-text';
+                        
+                        let questionParagraph = document.createElement('p');
+                        questionParagraph.style.backgroundColor = 'purple'; 
+                        questionParagraph.style.color = 'white'; 
+                        questionParagraph.style.padding = '10px'; 
+                        questionParagraph.style.borderRadius = '5px'; 
+                        questionParagraph.style.marginBottom = '20px';
+                        questionParagraph.innerHTML = `<strong></strong> ${questionText}`;
+                        
                         let strongTag = document.createElement('strong');
                         strongTag.textContent = '';
+                        
                         let answerParagraph = document.createElement('p');
                         answerParagraph.textContent = data.jawaban;
+        
+                        answerText.appendChild(questionParagraph);
                         answerText.appendChild(strongTag);
                         answerText.appendChild(answerParagraph);
-
+        
                         answerContainer.appendChild(profileCircle);
                         answerContainer.appendChild(answerText);
-
+        
                         answerContent.appendChild(answerContainer);
-
+        
                         document.getElementById('questions').style.display = 'none';
                         document.getElementById('answers').style.display = 'block';
                         previousView = currentView;
                         currentView = 'answers';
                     });
             }
-
-            function loadProgramAnswer(questionId) {
-                fetch(`/program-studi-questions/${questionId}/answer`)
-                    .then(response => response.json())
-                    .then(data => {
-                        let answerContent = document.getElementById('answer-content');
-                        answerContent.innerHTML = `<p><strong>Jawaban:</strong> ${data.jawaban}</p>`;
-
-                        document.getElementById('questions').style.display = 'none';
-                        document.getElementById('answers').style.display = 'block';
-                    });
-
-            }
-
-
+        
             function backToCategories() {
                 let answers = document.getElementById('answers');
                 let questions = document.getElementById('questions');
                 let programs = document.getElementById('programs');
                 let categories = document.getElementById('categories');
-
+        
                 if (currentView === 'answers') {
                     answers.style.display = 'none';
                     questions.style.display = 'block';
                     currentView = previousView;
-                    previousView = 'answers';
                 } else if (currentView === 'questionsFromPrograms') {
                     questions.style.display = 'none';
                     programs.style.display = 'block';
@@ -591,7 +591,7 @@
                     currentView = 'categories';
                 }
             }
-        </script>
+        </script> --}}
         <footer class="footer">
             <div class="container">
                 <footer class="site-footer">
