@@ -223,7 +223,6 @@
 }
 
 .admin-message {
-    background-color: #f3f3f3;
     color: #333;
     float: left;
     border-top-left-radius: 0;
@@ -243,7 +242,6 @@
 .user-message p {
     background-color: #8e24aa;
     color: white;
-
     border-top-right-radius: 0;
     border-top-left-radius: 10px;
 }

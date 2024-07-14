@@ -94,6 +94,35 @@ function displayMultiPartAnswer(answerParts) {
     chatContent.scrollTop = chatContent.scrollHeight;
 }
 
+function displayMessage(message, sender) {
+    var chatContent = document.getElementById("chatbot-content");
+    var chatMessage = document.createElement("div");
+    chatMessage.className = "chat-message";
+
+    var messageClass = sender === "user" ? "user-message" : "admin-message";
+    chatMessage.classList.add(messageClass);
+
+    if (sender === "admin") {
+        chatMessage.style.display = "flex";
+        chatMessage.style.alignItems = "center";
+
+        var profileCircle = document.createElement("div");
+        profileCircle.classList.add("profile-circle");
+        profileCircle.textContent = "C";
+
+        var messageText = document.createElement("p");
+        messageText.innerHTML = message;
+
+        chatMessage.appendChild(profileCircle);
+        chatMessage.appendChild(messageText);
+    } else {
+        chatMessage.innerHTML = "<p><strong></strong>" + message + "</p>";
+    }
+
+    chatContent.appendChild(chatMessage);
+    chatContent.scrollTop = chatContent.scrollHeight;
+}
+
 function sendMessage() {
     var userInput = document.getElementById("user-input").value.trim();
     if (!userInput) {
@@ -117,9 +146,20 @@ function sendMessage() {
         .then((response) => response.json())
         .then((data) => {
             if (data.response) {
-                if (Array.isArray(data.response)) {
+                if (data.questions) {
+                    displayMessage(data.response, "admin");
+                    displayQuestionButtonsNew(data.questions);
+                } else if (Array.isArray(data.response)) {
+                    displayMessage(
+                        "Berikut beberapa pertanyaan terkait:",
+                        "admin"
+                    );
                     displayQuestionButtonsNew(data.response);
                 } else if (typeof data.response === "object") {
+                    displayMessage(
+                        "Berikut beberapa pertanyaan terkait:",
+                        "admin"
+                    );
                     const questions = Object.keys(data.response).map((key) => ({
                         id: key,
                         pertanyaan: data.response[key],
@@ -172,7 +212,7 @@ function fetchAnswer(pertanyaanId, questionText) {
 }
 
 function displayQuestionButtonsNew(questions) {
-    console.log(questions);
+    var chatContent = document.getElementById("chatbot-content");
     var questionList = document.createElement("ul");
     questionList.classList.add("question-list");
 
@@ -189,37 +229,6 @@ function displayQuestionButtonsNew(questions) {
         questionList.appendChild(listItem);
     });
 
-    document.getElementById("chatbot-content").appendChild(questionList);
-}
-
-function displayMessage(message, sender) {
-    console.log(message);
-    if (displayedAnswers.includes(message)) {
-        console.log("Duplicate message detected: ", message);
-        return;
-    }
-    displayedAnswers.push(message);
-
-    var chatContent = document.getElementById("chatbot-content");
-    var chatMessage = document.createElement("div");
-    chatMessage.className = "chat-message";
-
-    if (sender === "admin") {
-        var profileCircle = document.createElement("div");
-        profileCircle.className = "profile-circle";
-        profileCircle.textContent = "C";
-
-        var messageText = document.createElement("p");
-        messageText.textContent = message;
-
-        chatMessage.appendChild(profileCircle);
-        chatMessage.appendChild(messageText);
-        chatMessage.classList.add("admin-message");
-    } else {
-        chatMessage.innerHTML = "<p><strong></strong>" + message + "</p>";
-        chatMessage.classList.add("user-message");
-    }
-
-    chatContent.appendChild(chatMessage);
+    chatContent.appendChild(questionList);
     chatContent.scrollTop = chatContent.scrollHeight;
 }

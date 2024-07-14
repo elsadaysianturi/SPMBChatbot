@@ -26,19 +26,32 @@ class ChatbotController extends Controller
         }
         $normalizedInput = $this->normalizeAndStem($userInput);
         \Log::info('Normalized Input: ' . $normalizedInput);
-
-        $keywords = ['institut', 'teknologi', 'del', 'institut teknologi del', 'spmb', 'mahasiswa', 'beasiswa', 'asrama',];
+    
+        $keywords = ['institut', 'teknologi', 'del', 'institut teknologi del', 'spmb', 'mahasiswa', 'beasiswa', 'asrama','laptop','bayar'];
         if (in_array($normalizedInput, $keywords)) {
             \Log::info('Keyword match found: ' . $normalizedInput);
-            return $this->getQuestionsByKeywords($normalizedInput);
+            $response = $this->getQuestionsByKeywords($normalizedInput);
+            $responseData = $response->getData(true);
+    
+            if (is_array($responseData['response']) && count($responseData['response']) > 0) {
+                return response()->json([
+                    'response' => 'Berikut beberapa pertanyaan terkait keyword yang Anda berikan:',
+                    'questions' => $responseData['response']
+                ]);
+            }
+    
+            return $response;
         }
-        
+    
         $kategori = Kategori::where('nama_kategori', 'LIKE', '%' . $normalizedInput . '%')->first();
         if ($kategori) {
             \Log::info('Kategori Ditemukan: ' . $kategori->nama_kategori);
-            return $this->getPertanyaanByKategori($kategori->id);
+            return response()->json([
+                'response' => 'Berikut beberapa pertanyaan terkait kategori yang Anda pilih:',
+                'questions' => $this->getPertanyaanByKategori($kategori->id)->getData(true)['response']
+            ]);
         }
-        
+    
         $rule = Rules::where('keyword', 'LIKE', '%' . $normalizedInput . '%')->first();
         if ($rule) {
             \Log::info('Rule Ditemukan: ' . $rule->response);
@@ -71,7 +84,7 @@ class ChatbotController extends Controller
         }
     
         return response()->json(['response' => 'Maaf, saya tidak mengerti pertanyaan Anda.']);
-    }    
+    } 
 
     private function normalizeAndStem($text)
     {
@@ -114,8 +127,11 @@ class ChatbotController extends Controller
     public function getPertanyaanByKategori($kategoriId)
     {
         $pertanyaan = PertanyaanJawaban::where('kategori_id', $kategoriId)->get();
-        $pertanyaanText = $pertanyaan->pluck('pertanyaan', 'id')->toArray();
-        return response()->json(['response' => $pertanyaanText]);
+        $pertanyaanData = $pertanyaan->map(function ($item) {
+            return ['id' => $item->id, 'pertanyaan' => $item->pertanyaan];
+        });
+        
+        return response()->json(['response' => $pertanyaanData]);
     }
 
     public function getJawabanByPertanyaanId(Request $request)
