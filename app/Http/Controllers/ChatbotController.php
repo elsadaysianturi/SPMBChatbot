@@ -27,7 +27,7 @@ class ChatbotController extends Controller
         $normalizedInput = $this->normalizeAndStem($userInput);
         \Log::info('Normalized Input: ' . $normalizedInput);
     
-        $keywords = ['institut', 'teknologi', 'del', 'institut teknologi del', 'spmb', 'mahasiswa', 'beasiswa', 'asrama','laptop','bayar'];
+        $keywords = ['institut', 'teknologi', 'del', 'institut teknologi del', 'spmb', 'mahasiswa', 'beasiswa', 'asrama','laptop','bayar','metalurgi','cicilan','cicil','PMDK'];
         if (in_array($normalizedInput, $keywords)) {
             \Log::info('Keyword match found: ' . $normalizedInput);
             $response = $this->getQuestionsByKeywords($normalizedInput);
