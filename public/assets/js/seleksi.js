@@ -28,8 +28,8 @@ var cssStyles = `
 }
 
 .profile-circle {
-    width: 24px; /* Adjust size as needed */
-    height: 24px; /* Adjust size as needed */
+    width: 24px; 
+    height: 24px;
     border-radius: 50%;
     background-color: purple;
     color: white;
@@ -37,7 +37,7 @@ var cssStyles = `
     align-items: center;
     justify-content: center;
     font-weight: bold;
-    margin-right: 8px; /* Space between profile and text */
+    margin-right: 8px; 
 }
 `;
 styleElement.appendChild(document.createTextNode(cssStyles));

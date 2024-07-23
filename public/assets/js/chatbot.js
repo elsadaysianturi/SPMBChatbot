@@ -44,7 +44,7 @@ chatbotButton.onclick = function () {
 };
 
 document
-    .querySelector(".back-to-categories")
+    .querySelector(".back-to-question-container")
     .addEventListener("click", function () {
         backToCategories();
     });
@@ -63,35 +63,6 @@ function closeChatbot() {
     document.getElementById("questions").style.display = "none";
     document.getElementById("answers").style.display = "none";
     currentView = "categories";
-    previousView = "";
-}
-
-function displayMultiPartAnswer(answerParts) {
-    var chatContent = document.getElementById("chatbot-content");
-    answerParts.forEach(function (part) {
-        if (displayedAnswers.includes(part)) {
-            console.log("Duplicate part detected: ", part);
-            return;
-        }
-        displayedAnswers.push(part);
-
-        var chatMessage = document.createElement("div");
-        chatMessage.className = "chat-message admin-message";
-
-        var profileCircle = document.createElement("div");
-        profileCircle.className = "profile-circle";
-        profileCircle.textContent = "C";
-
-        var messageText = document.createElement("p");
-        messageText.textContent = part;
-
-        chatMessage.appendChild(profileCircle);
-        chatMessage.appendChild(messageText);
-
-        chatContent.appendChild(chatMessage);
-    });
-
-    chatContent.scrollTop = chatContent.scrollHeight;
 }
 
 function displayMessage(message, sender) {
@@ -184,7 +155,7 @@ function sendMessage() {
 function fetchAnswer(pertanyaanId, questionText) {
     displayMessage(questionText, "user");
 
-    fetch("/chatbot/jawaban", {
+    fetch("/chatbot/get-jawaban", {
         method: "POST",
         headers: {
             "Content-Type": "application/json",

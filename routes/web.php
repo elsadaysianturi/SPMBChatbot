@@ -21,6 +21,7 @@ use App\Http\Controllers\ChatbotController;
 Route::get('/', function () {
     return view('pages.web.dashboard.home');
 });
+
 Route::get('/categories', [KategoriController::class, 'index']);
 Route::get('/categories', [PertanyaanJawabanController::class, 'getCategories']);
 Route::get('/categories/{id}/questions', [PertanyaanJawabanController::class, 'getQuestionsByCategory']);
@@ -29,4 +30,5 @@ Route::get('/program-studi/{id}/questions', [PertanyaanjawabanProgramstudiContro
 Route::get('/questions/{id}/answer', [PertanyaanJawabanController::class, 'getAnswerByQuestionId']);
 Route::get('/program-studi-questions/{id}/answer', [PertanyaanjawabanProgramstudiController::class, 'getAnswerByQuestionId']);
 Route::post('/chatbot/message', [ChatbotController::class, 'handleUserInput']);
-Route::post('/chatbot/jawaban', [ChatbotController::class, 'getJawabanByPertanyaanId']);
+Route::post('/chatbot/get-questions', [ChatbotController::class, 'getQuestionsByKeywords']);
+Route::post('/chatbot/get-jawaban', [ChatbotController::class, 'getJawabanByPertanyaanId']);
