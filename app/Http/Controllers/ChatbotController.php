@@ -170,29 +170,29 @@ class ChatbotController extends Controller
         return preg_replace('/\s+/', ' ', trim($response));
     }      
 
-    private function getBestResponse($relevantTokens)
-    {
-        $responses = [];
-        $uniqueResponses = []; 
+    // private function getBestResponse($relevantTokens)
+    // {
+    //     $responses = [];
+    //     $uniqueResponses = []; 
     
-        foreach ($relevantTokens as $token) {
-            $responseForToken = $this->getResponseForToken($token);
+    //     foreach ($relevantTokens as $token) {
+    //         $responseForToken = $this->getResponseForToken($token);
     
-            if ($responseForToken) {
-                $responseHash = md5($responseForToken); 
-                if (!in_array($responseHash, $uniqueResponses)) {
-                    $uniqueResponses[] = $responseHash;
-                    $responses[] = $responseForToken;
-                }
-            }
-        }
+    //         if ($responseForToken) {
+    //             $responseHash = md5($responseForToken); 
+    //             if (!in_array($responseHash, $uniqueResponses)) {
+    //                 $uniqueResponses[] = $responseHash;
+    //                 $responses[] = $responseForToken;
+    //             }
+    //         }
+    //     }
     
-        if (count($responses) > 0) {
-            return implode("\n", $responses); 
-        }
+    //     if (count($responses) > 0) {
+    //         return implode("\n", $responses); 
+    //     }
     
-        return 'Maaf, saya tidak dapat menemukan jawaban yang tepat.';
-    }
+    //     return 'Maaf, saya tidak dapat menemukan jawaban yang tepat.';
+    // }
 
     private function getResponseForToken($token)
     {
