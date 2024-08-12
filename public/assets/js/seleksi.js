@@ -10,12 +10,13 @@ var cssStyles = `
 }
 
 .user-message p {
-    background-color: #808080; 
+    background-color: #101920; 
     color: white ;
     display: inline-block;
-    border-radius: 10px; 
+    border-radius: 20px; 
     padding: 10px 15px;
     margin: 5px;
+    font-family: "Avenir Next Paneuropean SemiCondensed", sans-serif;
 }
 
 .admin-message {
@@ -23,12 +24,13 @@ var cssStyles = `
 }
 
 .admin-message p {
-    background-color: #f0f0f0; 
+    background-color: #F3F3F3; 
     color: #333; 
     display: inline-block;
-    border-radius: 10px; 
+    border-radius: 20px; 
     padding: 10px 15px;
     margin: 5px;
+    font-family: "Avenir Next Paneuropean SemiCondensed", sans-serif;
 }
 
 `;
@@ -37,10 +39,10 @@ styleElement.innerHTML = cssStyles;
 document.head.appendChild(styleElement);
 
 
+// Rules untuk kategori "Seleksi"
 var seleksiRules = [
     {
-        question:
-            "Jalur seleksi apa saja yang tersedia di Institut Teknologi Del?",
+        question: "Jalur seleksi apa saja yang tersedia di Institut Teknologi Del?",
         answer: "Jalur seleksi yang disediakan oleh SPMB IT Del adalah sebanyak 6 jalur yaitu sebagai berikut: \
         1. PMDK (Penelusuran Minat Bakat dan Kemampuan) \
         2. USM 1 (Ujian Saring Masuk) \
@@ -50,11 +52,10 @@ var seleksiRules = [
         6. JPS (Jalur Prestasi Siswa) \
         \
         Untuk detail jadwal masing-masing jalur dapat dilihat melalui link berikut: \
-        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex",
+        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex"
     },
     {
-        question:
-            "Persyaratan apa saja yang harus dipenuhi untuk mengikuti jalur seleksi SPMB IT Del?",
+        question: "Persyaratan apa saja yang harus dipenuhi untuk mengikuti jalur seleksi SPMB IT Del?",
         answer: "Berikut merupakan persyaratan yang harus dipenuhi oleh calon pendaftar SPMB IT Del. Terdapat dua persyaratan yaitu persyaratan umum dan persyaratan khusus program studi: \
         a) Persyaratan umum \
         1. Memiliki minat yang tinggi untuk melanjutkan studi di IT Del dan akan mendaftarkan diri sebagai mahasiswa IT Del apabila dinyatakan lulus seleksi untuk program USM; \
@@ -88,19 +89,18 @@ var seleksiRules = [
         • SMA jurusan IPA/MIA. \
         d) Program Studi S1 Informatika, S1 Sistem Informasi, D4 Teknologi Rekayasa Perangkat Lunak, D3 Teknologi Informasi dan D3 Teknologi Komputer: \
         • SMA jurusan IPA/MIA atau SMK Teknik (Informatika, Komputer). \
-        Ket *: disampaikan pada saat daftar ulang daring",
+        Ket *: disampaikan pada saat daftar ulang daring"
     },
     {
-        question:
-            "Bagaimana cara melihat hasil seleksi dan kapan pengumuman hasil seleksi SPMB IT Del?",
-        answer: "Hasil Seleksi SPMB dapat di lihat pada website resmi https://spmb.del.ac.id/ yang terdapat pada halaman home bagian pengumuman atau dapat dilihat pada link berikut: http://spmb.del.ac.id/index.php?r=pmb-pengumuman%2Findex",
-    },
+        question: "Bagaimana cara melihat hasil seleksi dan kapan pengumuman hasil seleksi SPMB IT Del?",
+        answer: "Hasil Seleksi SPMB dapat di lihat pada website resmi https://spmb.del.ac.id/ yang terdapat pada halaman home bagian pengumuman atau dapat dilihat pada link berikut: http://spmb.del.ac.id/index.php?r=pmb-pengumuman%2Findex"
+    }
 ];
 
+// Rules tambahan untuk kategori "Pendaftaran"
 var pendaftaranRules = [
     {
-        question:
-            "Bagaimana proses pendaftaran mahasiswa baru di Institut Teknologi Del?",
+        question: "Bagaimana proses pendaftaran mahasiswa baru di Institut Teknologi Del?",
         answer: "Berikut merupakan panduan pendaftaran Seleksi Penerimaan Mahasiswa Baru (SPMB) IT Del. Pendaftaran dapat dilakukan dengan dua cara yaitu daring dan luring. \
         a) Luring \
         1. Pendaftaran setiap Kamis-Jumat Pukul 13.00-17.00 WIB. \
@@ -117,17 +117,15 @@ var pendaftaranRules = [
         • Foto 3X4 [size max 1 MB] \
         5. Menentukan besaran uang pembangunan \
         6. Verifikasi data oleh panitia SPMB IT Del \
-        Mendapatkan notifikasi bahwa anda telah terdaftar",
+        Mendapatkan notifikasi bahwa anda telah terdaftar"
     },
     {
-        question:
-            "Apakah bisa untuk pindah jurusan saat pendaftaran ulang dilakukan?",
+        question: "Apakah bisa untuk pindah jurusan saat pendaftaran ulang dilakukan?",
         answer: "Maaf untuk pertanyaan yang kamu ajukan tidak bisa dijawab oleh chatbot ini. Untuk pertanyaan lebih lanjut bisa ditanyakan melakukan kontak panitia SPMB yang dapat dilihat pada link berikut: \
-        spmb.del.ac.id/index.php?r=site%2Fkontak",
+        spmb.del.ac.id/index.php?r=site%2Fkontak"
     },
     {
-        question:
-            "Apa aja berkas yang harus dipersiapkan untuk melakukan pendaftaran ke IT Del?",
+        question: "Apa aja berkas yang harus dipersiapkan untuk melakukan pendaftaran ke IT Del?",
         answer: "Berikut merupakan berkas yang harus dipersiapkan untuk melakukan pendaftaran SPMB IT Del: \
         1. Data yang harus dilengkapi pada formulir pendafataran baik daring maupun luring: \
         • Memilih maksimal 3 pilihan program studi \
@@ -158,94 +156,91 @@ var pendaftaranRules = [
         • Mengisi Pengalaman Organisasi \
         • Mengisi tentang mendapatkan/mendengar informasi mengenai program penerimaan mahasiswa IT Del melalui apa? \
         • Mengisi Jumlah minimum N untuk uang pembangunan sekali bayar \
-        Mengunggah foto 3x4 untuk daring atau Menempelkan foto 3x4 untuk luring",
+        Mengunggah foto 3x4 untuk daring atau Menempelkan foto 3x4 untuk luring"
     },
     {
         question: "Apakah lulusan SMK bisa melakukan pendaftaran ke IT Del?",
-        answer: "Ya, lulusan SMK Teknik dengan jurusan tertentu bisa melakukan pendaftaran SPMB IT Del.",
+        answer: "Ya, lulusan SMK Teknik dengan jurusan tertentu bisa melakukan pendaftaran SPMB IT Del."
     },
     {
         question: "Kapan pendaftaran ulang SPMB IT Del dilaksanakan?",
-        answer: "Pendaftaran ulang SPMB IT Del berbeda-beda tergantung jalur seleksi yang diikuti. Untuk lebih detailnya bisa dilihat pada website https://spmb.del.ac.id/ sdi bagian menu 'INFO & PENDAFTARAN' dan pilih jalur seleksi yang kamu ikuti.",
-    },
+        answer: "Pendaftaran ulang SPMB IT Del berbeda-beda tergantung jalur seleksi yang diikuti. Untuk lebih detailnya bisa dilihat pada website https://spmb.del.ac.id/ sdi bagian menu 'INFO & PENDAFTARAN' dan pilih jalur seleksi yang kamu ikuti."
+    }
 ];
 
 var jadwalRules = [
     {
-        question: "Kapan jadwal SPMB Institut Teknologi Del dilaksanakan?",
-        answer: "Jadwal pelaksanaan SPMB IT Del dapat dilihat pada website resmi https://spmb.del.ac.id/  yang terdapat pada halaman home atau dapat dilihat melalui link berikut:  https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex",
+        question:"Kapan jadwal SPMB Institut Teknologi Del dilaksanakan?",
+        answer:"Jadwal pelaksanaan SPMB IT Del dapat dilihat pada website resmi https://spmb.del.ac.id/  yang terdapat pada halaman home atau dapat dilihat melalui link berikut:  https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex"
     },
     {
-        question: "Kapan jadwal psikotes dilaksanakan?",
-        answer: "Jadwal psikotes SPMB IT Del berbeda-beda tergantung jalur seleksi yang diikuti. Untuk lebih detailnya bisa dilihat pada website https://spmb.del.ac.id/ sdi bagian menu `INFO & PENDAFTARAN` dan pilih jalur seleksi yang kamu ikuti.",
-    },
+        question:"Kapan jadwal psikotes dilaksanakan?",
+        answer:"Jadwal psikotes SPMB IT Del berbeda-beda tergantung jalur seleksi yang diikuti. Untuk lebih detailnya bisa dilihat pada website https://spmb.del.ac.id/ sdi bagian menu `INFO & PENDAFTARAN` dan pilih jalur seleksi yang kamu ikuti."
+    }
 ];
 
 var biayaRules = [
     {
-        question: "Berapa biaya pendaftaran SPMB IT Del?",
-        answer: "Berikut merupakan biaya pendaftaran tiap jalur seleksi SPMB IT Del.\
+        question:"Berapa biaya pendaftaran SPMB IT Del?",
+        answer:"Berikut merupakan biaya pendaftaran tiap jalur seleksi SPMB IT Del.\
         1.	PMDK = Rp. 0\
         2.	USM 1 = Rp.0\
         3.	USM 2 = Rp.0\
         4.	USM 3 = Rp. 150,000\
         5.	UTBK = Rp. 150,000\
-        JPS = Rp. 100,000",
+        JPS = Rp. 100,000"
     },
     {
-        question: "Bagaimana cara membayar biaya pendaftaran SPMB IT Del?",
-        answer: "Pembayaran biaya pendaftaran SPMB dapat dilakukan baik secara manual maupun online Jika melalui online, pihak pantia SPMB IT Del akan memberikan Nomor Virtual Account (VA) untuk melakukan pembayaran ke nomor yang diberikan.",
+        question:"Bagaimana cara membayar biaya pendaftaran SPMB IT Del?",
+        answer:"Pembayaran biaya pendaftaran SPMB dapat dilakukan baik secara manual maupun online Jika melalui online, pihak pantia SPMB IT Del akan memberikan Nomor Virtual Account (VA) untuk melakukan pembayaran ke nomor yang diberikan."
     },
     {
-        question: "Berapa biaya kuliah di Institut Teknologi Del?",
-        answer: "Untuk rincian biaya yang diperlukan dapat dilihat melalui link berikut: http://spmb.del.ac.id/files/Biaya_Pendidikan_Final.pdf",
+        question:"Berapa biaya kuliah di Institut Teknologi Del?",
+        answer:"Untuk rincian biaya yang diperlukan dapat dilihat melalui link berikut: http://spmb.del.ac.id/files/Biaya_Pendidikan_Final.pdf"
     },
     {
-        question:
-            "Dalam pembayaran biaya pembangunan apakah harus dibayar langsung secara lunas atau bisa dicicil?",
-        answer: "Maaf untuk pertanyaan yang kamu ajukan tidak bisa dijawab oleh chatbot ini. Untuk pertanyaan lebih lanjut bisa ditanyakan melakukan kontak panitia SPMB yang dapat dilihat pada link berikut: \
-        spmb.del.ac.id/index.php?r=site%2Fkontak",
+        question:"Dalam pembayaran biaya pembangunan apakah harus dibayar langsung secara lunas atau bisa dicicil?",
+        answer:"Maaf untuk pertanyaan yang kamu ajukan tidak bisa dijawab oleh chatbot ini. Untuk pertanyaan lebih lanjut bisa ditanyakan melakukan kontak panitia SPMB yang dapat dilihat pada link berikut: \
+        spmb.del.ac.id/index.php?r=site%2Fkontak"
     },
 ];
 
 var beasiswaRules = [
     {
-        question:
-            "Apakah ada beasiswa yang disediakan oleh pihak IT Del dan jenis beasiswa apa saja yang tersedia?",
-        answer: "Ada beberapa beasiswa yang disediakan oleh pihak IT Del. Beasiswa tersebut diperuntukkan bagi mahasiswa dengan berbagai latar belakang, baik dari segi prestasi akademik, ekonomi. \
+        question:"Apakah ada beasiswa yang disediakan oleh pihak IT Del dan jenis beasiswa apa saja yang tersedia?",
+        answer:"Ada beberapa beasiswa yang disediakan oleh pihak IT Del. Beasiswa tersebut diperuntukkan bagi mahasiswa dengan berbagai latar belakang, baik dari segi prestasi akademik, ekonomi. \
         Berikut merupakan beasiswa yang disediakan di Kampus Institut Teknologi Del antara lain:\
         1.	Beasiswa Tanoto\
         2.	Beasiswa Bidikmisi\
         3.	Beasiswa Rajawali\
         4.	Beasiswa Berpestasi,\
-        Dan terdapat beberapa beasiswa lainnya yang tersedia di Institut Teknologi Del dapat diakses melalui website berikut http://www.del.ac.id pada menu `Program Pendidikan` atau bisa melalui link berikut: https://www.del.ac.id/?page_id=14564",
+        Dan terdapat beberapa beasiswa lainnya yang tersedia di Institut Teknologi Del dapat diakses melalui website berikut http://www.del.ac.id pada menu `Program Pendidikan` atau bisa melalui link berikut: https://www.del.ac.id/?page_id=14564"
     },
     {
-        question:
-            "Bagaimana cara mendapatkan beasiswa di Institut Teknologi Del?",
-        answer: "Cara mendapatkan beasiswa di Institut Teknolofgi Del berbeda-beda tergantung jenis beasiswanya. Untuk lebih detail bagaimana cara mendapatkan beasiswa dapat dilihat melalui link berikut: https://www.del.ac.id/?page_id=14564 ",
-    },
+        question:"Bagaimana cara mendapatkan beasiswa di Institut Teknologi Del?",
+        answer:"Cara mendapatkan beasiswa di Institut Teknolofgi Del berbeda-beda tergantung jenis beasiswanya. Untuk lebih detail bagaimana cara mendapatkan beasiswa dapat dilihat melalui link berikut: https://www.del.ac.id/?page_id=14564 "
+    }
 ];
 
 var fasilitasRules = [
     {
-        question: "Apa saja fasilitas yang disediakan oleh pihak IT Del?",
-        answer: "Fasilitas yang disediakan di Kampus Institut Teknologi Del antara lain:\
+        question:"Apa saja fasilitas yang disediakan oleh pihak IT Del?",
+        answer:"Fasilitas yang disediakan di Kampus Institut Teknologi Del antara lain:\
         1)	Laboratorium dan Kelas\
         2)	Akomodasi\
         3)	Kantin\
         4)	Perpustakaan\
         5)	Hiburan dan Olahraga\
         6)	Ruang Terbuka\
-        7)	Klinik",
+        7)	Klinik"
     },
     {
-        question:
-            "Apakah ada ketentuan dalam menggunakan fasilitas yang disediakan oleh IT Del?",
-        answer: "Beberapa fasilitas yang disediakan oleh pihak Kampus Institut Teknologi Del memiliki ketentuan masing-masing. Untuk informasi ketentuan dari fasilitas dapat diakses melalui website berikut http://www.del.ac.id pada menu fasilitas dan pilih jenis fasilitas.",
-    },
+        question:"Apakah ada ketentuan dalam menggunakan fasilitas yang disediakan oleh IT Del?",
+        answer:"Beberapa fasilitas yang disediakan oleh pihak Kampus Institut Teknologi Del memiliki ketentuan masing-masing. Untuk informasi ketentuan dari fasilitas dapat diakses melalui website berikut http://www.del.ac.id pada menu fasilitas dan pilih jenis fasilitas."
+    }
 ];
 
+// Rules tambahan untuk kategori "Seleksi"
 var additionalRules = [
     {
         question: "jalur seleksi",
@@ -257,7 +252,7 @@ var additionalRules = [
         5. UTBK (Ujian Tulis Berbasis Komputer/Sertifikat UTBK)\
         6. JPS (Jalur Prestasi Siswa)\
         Untuk detail jadwal masing-masing jalur, Anda dapat melihatnya melalui link berikut: \
-        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex",
+        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex"
     },
     {
         question: "jalur",
@@ -269,7 +264,7 @@ var additionalRules = [
         5. UTBK (Ujian Tulis Berbasis Komputer/Sertifikat UTBK)\
         6. JPS (Jalur Prestasi Siswa)\
         Untuk detail jadwal masing-masing jalur, Anda dapat melihatnya melalui link berikut: \
-        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex",
+        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex"
     },
     {
         question: "jalur penerimaan",
@@ -281,7 +276,7 @@ var additionalRules = [
         5. UTBK (Ujian Tulis Berbasis Komputer/Sertifikat UTBK)\
         6. JPS (Jalur Prestasi Siswa)\
         Untuk detail jadwal masing-masing jalur, Anda dapat melihatnya melalui link berikut: \
-        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex",
+        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex"
     },
     {
         question: "penerimaan",
@@ -293,7 +288,7 @@ var additionalRules = [
         5. UTBK (Ujian Tulis Berbasis Komputer/Sertifikat UTBK)\
         6. JPS (Jalur Prestasi Siswa)\
         Untuk detail jadwal masing-masing jalur, Anda dapat melihatnya melalui link berikut: \
-        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex",
+        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex"
     },
     {
         question: "proses seleksi",
@@ -305,7 +300,7 @@ var additionalRules = [
         5. UTBK (Ujian Tulis Berbasis Komputer/Sertifikat UTBK)\
         6. JPS (Jalur Prestasi Siswa)\
         Untuk detail jadwal masing-masing jalur, Anda dapat melihatnya melalui link berikut: \
-        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex",
+        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex"
     },
     {
         question: "sistem seleksi",
@@ -317,7 +312,7 @@ var additionalRules = [
         5. UTBK (Ujian Tulis Berbasis Komputer/Sertifikat UTBK)\
         6. JPS (Jalur Prestasi Siswa)\
         Untuk detail jadwal masing-masing jalur, Anda dapat melihatnya melalui link berikut: \
-        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex",
+        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex"
     },
     {
         question: "ujian seleksi",
@@ -329,7 +324,7 @@ var additionalRules = [
         5. UTBK (Ujian Tulis Berbasis Komputer/Sertifikat UTBK)\
         6. JPS (Jalur Prestasi Siswa)\
         Untuk detail jadwal masing-masing jalur, Anda dapat melihatnya melalui link berikut: \
-        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex",
+        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex"
     },
     {
         question: "ujian",
@@ -341,7 +336,7 @@ var additionalRules = [
         5. UTBK (Ujian Tulis Berbasis Komputer/Sertifikat UTBK)\
         6. JPS (Jalur Prestasi Siswa)\
         Untuk detail jadwal masing-masing jalur, Anda dapat melihatnya melalui link berikut: \
-        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex",
+        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex"
     },
     {
         question: "penilaian seleksi",
@@ -353,7 +348,7 @@ var additionalRules = [
         5. UTBK (Ujian Tulis Berbasis Komputer/Sertifikat UTBK)\
         6. JPS (Jalur Prestasi Siswa)\
         Untuk detail jadwal masing-masing jalur, Anda dapat melihatnya melalui link berikut: \
-        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex",
+        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex"
     },
     {
         question: "penilaian",
@@ -365,7 +360,7 @@ var additionalRules = [
         5. UTBK (Ujian Tulis Berbasis Komputer/Sertifikat UTBK)\
         6. JPS (Jalur Prestasi Siswa)\
         Untuk detail jadwal masing-masing jalur, Anda dapat melihatnya melalui link berikut: \
-        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex",
+        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex"
     },
     {
         question: "jadwal seleksi",
@@ -377,7 +372,7 @@ var additionalRules = [
         5. UTBK (Ujian Tulis Berbasis Komputer/Sertifikat UTBK)\
         6. JPS (Jalur Prestasi Siswa)\
         Untuk detail jadwal masing-masing jalur, Anda dapat melihatnya melalui link berikut: \
-        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex",
+        https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex"
     },
     {
         question: "persyaratan seleksi",
@@ -414,7 +409,7 @@ var additionalRules = [
         •	SMA jurusan IPA/MIA.\
         d)	Program Studi S1 Informatika, S1 Sistem Informasi, D4 Teknologi Rekayasa Perangkat Lunak, D3 Teknologi Informasi dan D3 Teknologi Komputer: \
         •	SMA jurusan IPA/MIA atau SMK Teknik (Informatika, Komputer).\
-        Ket *: disampaikan pada saat daftar ulang daring",
+        Ket *: disampaikan pada saat daftar ulang daring"
     },
     {
         question: "syarat seleksi",
@@ -451,7 +446,7 @@ var additionalRules = [
         •	SMA jurusan IPA/MIA.\
         d)	Program Studi S1 Informatika, S1 Sistem Informasi, D4 Teknologi Rekayasa Perangkat Lunak, D3 Teknologi Informasi dan D3 Teknologi Komputer: \
         •	SMA jurusan IPA/MIA atau SMK Teknik (Informatika, Komputer).\
-        Ket *: disampaikan pada saat daftar ulang daring",
+        Ket *: disampaikan pada saat daftar ulang daring"
     },
     {
         question: "syarat",
@@ -488,131 +483,131 @@ var additionalRules = [
         •	SMA jurusan IPA/MIA.\
         d)	Program Studi S1 Informatika, S1 Sistem Informasi, D4 Teknologi Rekayasa Perangkat Lunak, D3 Teknologi Informasi dan D3 Teknologi Komputer: \
         •	SMA jurusan IPA/MIA atau SMK Teknik (Informatika, Komputer).\
-        Ket *: disampaikan pada saat daftar ulang daring",
+        Ket *: disampaikan pada saat daftar ulang daring"
     },
     {
         question: "hasil seleksi",
-        answer: "Hasil Seleksi SPMB dapat di lihat pada website resmi https://spmb.del.ac.id/ yang terdapat pada halaman home bagian pengumuman atau dapat dilihat pada link berikut: http://spmb.del.ac.id/index.php?r=pmb-pengumuman%2Findex",
+        answer: "Hasil Seleksi SPMB dapat di lihat pada website resmi https://spmb.del.ac.id/ yang terdapat pada halaman home bagian pengumuman atau dapat dilihat pada link berikut: http://spmb.del.ac.id/index.php?r=pmb-pengumuman%2Findex"
     },
     {
         question: "pengumuman hasil seleksi",
-        answer: "Hasil Seleksi SPMB dapat di lihat pada website resmi https://spmb.del.ac.id/ yang terdapat pada halaman home bagian pengumuman atau dapat dilihat pada link berikut: http://spmb.del.ac.id/index.php?r=pmb-pengumuman%2Findex",
+        answer: "Hasil Seleksi SPMB dapat di lihat pada website resmi https://spmb.del.ac.id/ yang terdapat pada halaman home bagian pengumuman atau dapat dilihat pada link berikut: http://spmb.del.ac.id/index.php?r=pmb-pengumuman%2Findex"
     },
     {
         question: "pengumuman seleksi",
-        answer: "Hasil Seleksi SPMB dapat di lihat pada website resmi https://spmb.del.ac.id/ yang terdapat pada halaman home bagian pengumuman atau dapat dilihat pada link berikut: http://spmb.del.ac.id/index.php?r=pmb-pengumuman%2Findex",
+        answer: "Hasil Seleksi SPMB dapat di lihat pada website resmi https://spmb.del.ac.id/ yang terdapat pada halaman home bagian pengumuman atau dapat dilihat pada link berikut: http://spmb.del.ac.id/index.php?r=pmb-pengumuman%2Findex"
     },
     {
         question: "hasil akhir",
-        answer: "Hasil Seleksi SPMB dapat di lihat pada website resmi https://spmb.del.ac.id/ yang terdapat pada halaman home bagian pengumuman atau dapat dilihat pada link berikut: http://spmb.del.ac.id/index.php?r=pmb-pengumuman%2Findex",
+        answer: "Hasil Seleksi SPMB dapat di lihat pada website resmi https://spmb.del.ac.id/ yang terdapat pada halaman home bagian pengumuman atau dapat dilihat pada link berikut: http://spmb.del.ac.id/index.php?r=pmb-pengumuman%2Findex"
     },
     {
         question: "pengumuman",
-        answer: "Hasil Seleksi SPMB dapat di lihat pada website resmi https://spmb.del.ac.id/ yang terdapat pada halaman home bagian pengumuman atau dapat dilihat pada link berikut: http://spmb.del.ac.id/index.php?r=pmb-pengumuman%2Findex",
+        answer: "Hasil Seleksi SPMB dapat di lihat pada website resmi https://spmb.del.ac.id/ yang terdapat pada halaman home bagian pengumuman atau dapat dilihat pada link berikut: http://spmb.del.ac.id/index.php?r=pmb-pengumuman%2Findex"
     },
-    // {
-    //     question: "proses pendaftaran",
-    //     answer: "Berikut merupakan panduan pendaftaran Seleksi Penerimaan Mahasiswa Baru (SPMB) IT Del.\
-    //     Pendaftaran dapat dilakukan dengan dua cara yaitu daring dan luring. \
-    //     a)	Luring\
-    //     1.	Pendaftaran setiap Kamis-Jumat Pukul 13.00-17.00 WIB. \
-    //     2.	Mengisi formulir pendaftaran \
-    //     3.	Membawa foto 3X4 2 lembar.\
-    //     b)	Daring\
-    //     Buka website https://spmb.del.ac.id/ \
-    //     1.	Melakukan registrasi dan aktivasi akun di Email\
-    //     2.	Login dengan akun yang telah didaftarkan\
-    //     3.	Pilih 3 program studi yang diminati \
-    //     4.	Mengisi data diri\
-    //     •	Data jumlah Mata Pelajaran Semester V\
-    //     •	Data Total Nilai Rapor\
-    //     •	Foto 3X4 [size max 1 MB]\
-    //     5.	Menentukan besaran uang pembangunan\
-    //     6.	Verifikasi data oleh panitia SPMB IT Del\
-    //     Mendapatkan notifikasi bahwa anda telah terdaftar"
-    // },
-    // {
-    //     question: "daftar",
-    //     answer: "Berikut merupakan panduan pendaftaran Seleksi Penerimaan Mahasiswa Baru (SPMB) IT Del.\
-    //     Pendaftaran dapat dilakukan dengan dua cara yaitu daring dan luring. \
-    //     a)	Luring\
-    //     1.	Pendaftaran setiap Kamis-Jumat Pukul 13.00-17.00 WIB. \
-    //     2.	Mengisi formulir pendaftaran \
-    //     3.	Membawa foto 3X4 2 lembar.\
-    //     b)	Daring\
-    //     Buka website https://spmb.del.ac.id/ \
-    //     1.	Melakukan registrasi dan aktivasi akun di Email\
-    //     2.	Login dengan akun yang telah didaftarkan\
-    //     3.	Pilih 3 program studi yang diminati \
-    //     4.	Mengisi data diri\
-    //     •	Data jumlah Mata Pelajaran Semester V\
-    //     •	Data Total Nilai Rapor\
-    //     •	Foto 3X4 [size max 1 MB]\
-    //     5.	Menentukan besaran uang pembangunan\
-    //     6.	Verifikasi data oleh panitia SPMB IT Del\
-    //     Mendapatkan notifikasi bahwa anda telah terdaftar"
-    // },
-    // {
-    //     question: "cara daftar",
-    //     answer: "Berikut merupakan panduan pendaftaran Seleksi Penerimaan Mahasiswa Baru (SPMB) IT Del.\
-    //     Pendaftaran dapat dilakukan dengan dua cara yaitu daring dan luring. \
-    //     a)	Luring\
-    //     1.	Pendaftaran setiap Kamis-Jumat Pukul 13.00-17.00 WIB. \
-    //     2.	Mengisi formulir pendaftaran \
-    //     3.	Membawa foto 3X4 2 lembar.\
-    //     b)	Daring\
-    //     Buka website https://spmb.del.ac.id/ \
-    //     1.	Melakukan registrasi dan aktivasi akun di Email\
-    //     2.	Login dengan akun yang telah didaftarkan\
-    //     3.	Pilih 3 program studi yang diminati \
-    //     4.	Mengisi data diri\
-    //     •	Data jumlah Mata Pelajaran Semester V\
-    //     •	Data Total Nilai Rapor\
-    //     •	Foto 3X4 [size max 1 MB]\
-    //     5.	Menentukan besaran uang pembangunan\
-    //     6.	Verifikasi data oleh panitia SPMB IT Del\
-    //     Mendapatkan notifikasi bahwa anda telah terdaftar"
-    // },
-    // {
-    //     question: "panduan daftar",
-    //     answer: "Berikut merupakan panduan pendaftaran Seleksi Penerimaan Mahasiswa Baru (SPMB) IT Del.\
-    //     Pendaftaran dapat dilakukan dengan dua cara yaitu daring dan luring. \
-    //     a)	Luring\
-    //     1.	Pendaftaran setiap Kamis-Jumat Pukul 13.00-17.00 WIB. \
-    //     2.	Mengisi formulir pendaftaran \
-    //     3.	Membawa foto 3X4 2 lembar.\
-    //     b)	Daring\
-    //     Buka website https://spmb.del.ac.id/ \
-    //     1.	Melakukan registrasi dan aktivasi akun di Email\
-    //     2.	Login dengan akun yang telah didaftarkan\
-    //     3.	Pilih 3 program studi yang diminati \
-    //     4.	Mengisi data diri\
-    //     •	Data jumlah Mata Pelajaran Semester V\
-    //     •	Data Total Nilai Rapor\
-    //     •	Foto 3X4 [size max 1 MB]\
-    //     5.	Menentukan besaran uang pembangunan\
-    //     6.	Verifikasi data oleh panitia SPMB IT Del\
-    //     Mendapatkan notifikasi bahwa anda telah terdaftar"
-    // },
+    {
+        question: "proses pendaftaran",
+        answer: "Berikut merupakan panduan pendaftaran Seleksi Penerimaan Mahasiswa Baru (SPMB) IT Del.\
+        Pendaftaran dapat dilakukan dengan dua cara yaitu daring dan luring. \
+        a)	Luring\
+        1.	Pendaftaran setiap Kamis-Jumat Pukul 13.00-17.00 WIB. \
+        2.	Mengisi formulir pendaftaran \
+        3.	Membawa foto 3X4 2 lembar.\
+        b)	Daring\
+        Buka website https://spmb.del.ac.id/ \
+        1.	Melakukan registrasi dan aktivasi akun di Email\
+        2.	Login dengan akun yang telah didaftarkan\
+        3.	Pilih 3 program studi yang diminati \
+        4.	Mengisi data diri\
+        •	Data jumlah Mata Pelajaran Semester V\
+        •	Data Total Nilai Rapor\
+        •	Foto 3X4 [size max 1 MB]\
+        5.	Menentukan besaran uang pembangunan\
+        6.	Verifikasi data oleh panitia SPMB IT Del\
+        Mendapatkan notifikasi bahwa anda telah terdaftar"
+    },
+    {
+        question: "daftar",
+        answer: "Berikut merupakan panduan pendaftaran Seleksi Penerimaan Mahasiswa Baru (SPMB) IT Del.\
+        Pendaftaran dapat dilakukan dengan dua cara yaitu daring dan luring. \
+        a)	Luring\
+        1.	Pendaftaran setiap Kamis-Jumat Pukul 13.00-17.00 WIB. \
+        2.	Mengisi formulir pendaftaran \
+        3.	Membawa foto 3X4 2 lembar.\
+        b)	Daring\
+        Buka website https://spmb.del.ac.id/ \
+        1.	Melakukan registrasi dan aktivasi akun di Email\
+        2.	Login dengan akun yang telah didaftarkan\
+        3.	Pilih 3 program studi yang diminati \
+        4.	Mengisi data diri\
+        •	Data jumlah Mata Pelajaran Semester V\
+        •	Data Total Nilai Rapor\
+        •	Foto 3X4 [size max 1 MB]\
+        5.	Menentukan besaran uang pembangunan\
+        6.	Verifikasi data oleh panitia SPMB IT Del\
+        Mendapatkan notifikasi bahwa anda telah terdaftar"
+    },
+    {
+        question: "cara daftar",
+        answer: "Berikut merupakan panduan pendaftaran Seleksi Penerimaan Mahasiswa Baru (SPMB) IT Del.\
+        Pendaftaran dapat dilakukan dengan dua cara yaitu daring dan luring. \
+        a)	Luring\
+        1.	Pendaftaran setiap Kamis-Jumat Pukul 13.00-17.00 WIB. \
+        2.	Mengisi formulir pendaftaran \
+        3.	Membawa foto 3X4 2 lembar.\
+        b)	Daring\
+        Buka website https://spmb.del.ac.id/ \
+        1.	Melakukan registrasi dan aktivasi akun di Email\
+        2.	Login dengan akun yang telah didaftarkan\
+        3.	Pilih 3 program studi yang diminati \
+        4.	Mengisi data diri\
+        •	Data jumlah Mata Pelajaran Semester V\
+        •	Data Total Nilai Rapor\
+        •	Foto 3X4 [size max 1 MB]\
+        5.	Menentukan besaran uang pembangunan\
+        6.	Verifikasi data oleh panitia SPMB IT Del\
+        Mendapatkan notifikasi bahwa anda telah terdaftar"
+    },
+    {
+        question: "panduan daftar",
+        answer: "Berikut merupakan panduan pendaftaran Seleksi Penerimaan Mahasiswa Baru (SPMB) IT Del.\
+        Pendaftaran dapat dilakukan dengan dua cara yaitu daring dan luring. \
+        a)	Luring\
+        1.	Pendaftaran setiap Kamis-Jumat Pukul 13.00-17.00 WIB. \
+        2.	Mengisi formulir pendaftaran \
+        3.	Membawa foto 3X4 2 lembar.\
+        b)	Daring\
+        Buka website https://spmb.del.ac.id/ \
+        1.	Melakukan registrasi dan aktivasi akun di Email\
+        2.	Login dengan akun yang telah didaftarkan\
+        3.	Pilih 3 program studi yang diminati \
+        4.	Mengisi data diri\
+        •	Data jumlah Mata Pelajaran Semester V\
+        •	Data Total Nilai Rapor\
+        •	Foto 3X4 [size max 1 MB]\
+        5.	Menentukan besaran uang pembangunan\
+        6.	Verifikasi data oleh panitia SPMB IT Del\
+        Mendapatkan notifikasi bahwa anda telah terdaftar"
+    },
     {
         question: "pindah jurusan",
         answer: "Maaf untuk pertanyaan yang kamu ajukan tidak bisa dijawab oleh chatbot ini. Untuk pertanyaan lebih lanjut bisa ditanyakan melakukan kontak panitia SPMB yang dapat dilihat pada link berikut: \
-        spmb.del.ac.id/index.php?r=site%2Fkontak",
+        spmb.del.ac.id/index.php?r=site%2Fkontak"
     },
     {
         question: "pindah",
         answer: "Maaf untuk pertanyaan yang kamu ajukan tidak bisa dijawab oleh chatbot ini. Untuk pertanyaan lebih lanjut bisa ditanyakan melakukan kontak panitia SPMB yang dapat dilihat pada link berikut: \
-        spmb.del.ac.id/index.php?r=site%2Fkontak",
+        spmb.del.ac.id/index.php?r=site%2Fkontak"
     },
     {
         question: "lintas jurusan",
         answer: "Maaf untuk pertanyaan yang kamu ajukan tidak bisa dijawab oleh chatbot ini. Untuk pertanyaan lebih lanjut bisa ditanyakan melakukan kontak panitia SPMB yang dapat dilihat pada link berikut: \
-        spmb.del.ac.id/index.php?r=site%2Fkontak",
+        spmb.del.ac.id/index.php?r=site%2Fkontak"
     },
     {
         question: "ganti jurusan",
         answer: "Maaf untuk pertanyaan yang kamu ajukan tidak bisa dijawab oleh chatbot ini. Untuk pertanyaan lebih lanjut bisa ditanyakan melakukan kontak panitia SPMB yang dapat dilihat pada link berikut: \
-        spmb.del.ac.id/index.php?r=site%2Fkontak",
+        spmb.del.ac.id/index.php?r=site%2Fkontak"
     },
     {
         question: "berkas",
@@ -646,7 +641,7 @@ var additionalRules = [
         •	Mengisi Pengalaman Organisasi\
         •	Mengisi tentang mendapatkan/mendengar informasi mengenai program penerimaan mahasiswa IT Del melalui apa?\
         •	Mengisi Jumlah minimum N untuk uang pembangunan sekali bayar\
-        Mengunggah foto 3x4 untuk daring atau Menempelkan foto 3x4 untuk luring",
+        Mengunggah foto 3x4 untuk daring atau Menempelkan foto 3x4 untuk luring"
     },
     {
         question: "kelengkapan berkas",
@@ -680,7 +675,7 @@ var additionalRules = [
         •	Mengisi Pengalaman Organisasi\
         •	Mengisi tentang mendapatkan/mendengar informasi mengenai program penerimaan mahasiswa IT Del melalui apa?\
         •	Mengisi Jumlah minimum N untuk uang pembangunan sekali bayar\
-        Mengunggah foto 3x4 untuk daring atau Menempelkan foto 3x4 untuk luring",
+        Mengunggah foto 3x4 untuk daring atau Menempelkan foto 3x4 untuk luring"
     },
     {
         question: "file",
@@ -714,7 +709,7 @@ var additionalRules = [
         •	Mengisi Pengalaman Organisasi\
         •	Mengisi tentang mendapatkan/mendengar informasi mengenai program penerimaan mahasiswa IT Del melalui apa?\
         •	Mengisi Jumlah minimum N untuk uang pembangunan sekali bayar\
-        Mengunggah foto 3x4 untuk daring atau Menempelkan foto 3x4 untuk luring",
+        Mengunggah foto 3x4 untuk daring atau Menempelkan foto 3x4 untuk luring"
     },
     {
         question: "folder",
@@ -748,142 +743,134 @@ var additionalRules = [
         •	Mengisi Pengalaman Organisasi\
         •	Mengisi tentang mendapatkan/mendengar informasi mengenai program penerimaan mahasiswa IT Del melalui apa?\
         •	Mengisi Jumlah minimum N untuk uang pembangunan sekali bayar\
-        Mengunggah foto 3x4 untuk daring atau Menempelkan foto 3x4 untuk luring",
+        Mengunggah foto 3x4 untuk daring atau Menempelkan foto 3x4 untuk luring"
     },
     {
         question: "smk",
-        answer: "Ya, lulusan SMK Teknik dengan jurusan tertentu bisa melakukan pendaftaran SPMB IT Del.",
+        answer: "Ya, lulusan SMK Teknik dengan jurusan tertentu bisa melakukan pendaftaran SPMB IT Del."
     },
     {
         question: "lulusan smk",
-        answer: "Ya, lulusan SMK Teknik dengan jurusan tertentu bisa melakukan pendaftaran SPMB IT Del.",
+        answer: "Ya, lulusan SMK Teknik dengan jurusan tertentu bisa melakukan pendaftaran SPMB IT Del."
     },
     {
         question: "sekolah menengah kejurusan",
-        answer: "Ya, lulusan SMK Teknik dengan jurusan tertentu bisa melakukan pendaftaran SPMB IT Del.",
+        answer: "Ya, lulusan SMK Teknik dengan jurusan tertentu bisa melakukan pendaftaran SPMB IT Del."
     },
     {
         question: "smk (lulusan menengah kejurusan)",
-        answer: "Ya, lulusan SMK Teknik dengan jurusan tertentu bisa melakukan pendaftaran SPMB IT Del.",
+        answer: "Ya, lulusan SMK Teknik dengan jurusan tertentu bisa melakukan pendaftaran SPMB IT Del."
     },
     {
         question: "jadwal spmb",
-        answer: "Jadwal pelaksanaan SPMB IT Del dapat dilihat pada website resmi https://spmb.del.ac.id/  yang terdapat pada halaman home atau dapat dilihat melalui link berikut:  https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex",
+        answer: "Jadwal pelaksanaan SPMB IT Del dapat dilihat pada website resmi https://spmb.del.ac.id/  yang terdapat pada halaman home atau dapat dilihat melalui link berikut:  https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex"
     },
     {
         question: "waktu pelaksanaan ",
-        answer: "Jadwal pelaksanaan SPMB IT Del dapat dilihat pada website resmi https://spmb.del.ac.id/  yang terdapat pada halaman home atau dapat dilihat melalui link berikut:  https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex",
+        answer: "Jadwal pelaksanaan SPMB IT Del dapat dilihat pada website resmi https://spmb.del.ac.id/  yang terdapat pada halaman home atau dapat dilihat melalui link berikut:  https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex"
     },
     {
         question: "spmb",
-        answer: "Jadwal pelaksanaan SPMB IT Del dapat dilihat pada website resmi https://spmb.del.ac.id/  yang terdapat pada halaman home atau dapat dilihat melalui link berikut:  https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex",
+        answer: "Jadwal pelaksanaan SPMB IT Del dapat dilihat pada website resmi https://spmb.del.ac.id/  yang terdapat pada halaman home atau dapat dilihat melalui link berikut:  https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex"
     },
     {
         question: "waktu pelaksanaan spmb",
-        answer: "Jadwal pelaksanaan SPMB IT Del dapat dilihat pada website resmi https://spmb.del.ac.id/  yang terdapat pada halaman home atau dapat dilihat melalui link berikut:  https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex",
+        answer: "Jadwal pelaksanaan SPMB IT Del dapat dilihat pada website resmi https://spmb.del.ac.id/  yang terdapat pada halaman home atau dapat dilihat melalui link berikut:  https://spmb.del.ac.id/index.php?r=pmb-pendaftaran%2Findex"
     },
     {
         question: "jadwal psikotes",
-        answer: "Jadwal psikotes SPMB IT Del berbeda-beda tergantung jalur seleksi yang diikuti. Untuk lebih detailnya bisa dilihat pada website https://spmb.del.ac.id/ sdi bagian menu `INFO & PENDAFTARAN` dan pilih jalur seleksi yang kamu ikuti",
+        answer: "Jadwal psikotes SPMB IT Del berbeda-beda tergantung jalur seleksi yang diikuti. Untuk lebih detailnya bisa dilihat pada website https://spmb.del.ac.id/ sdi bagian menu `INFO & PENDAFTARAN` dan pilih jalur seleksi yang kamu ikuti"
     },
     {
         question: "psikotes",
-        answer: "Jadwal psikotes SPMB IT Del berbeda-beda tergantung jalur seleksi yang diikuti. Untuk lebih detailnya bisa dilihat pada website https://spmb.del.ac.id/ sdi bagian menu `INFO & PENDAFTARAN` dan pilih jalur seleksi yang kamu ikuti",
+        answer: "Jadwal psikotes SPMB IT Del berbeda-beda tergantung jalur seleksi yang diikuti. Untuk lebih detailnya bisa dilihat pada website https://spmb.del.ac.id/ sdi bagian menu `INFO & PENDAFTARAN` dan pilih jalur seleksi yang kamu ikuti"
     },
     {
         question: "waktu psikotes",
-        answer: "Jadwal psikotes SPMB IT Del berbeda-beda tergantung jalur seleksi yang diikuti. Untuk lebih detailnya bisa dilihat pada website https://spmb.del.ac.id/ sdi bagian menu `INFO & PENDAFTARAN` dan pilih jalur seleksi yang kamu ikuti",
+        answer: "Jadwal psikotes SPMB IT Del berbeda-beda tergantung jalur seleksi yang diikuti. Untuk lebih detailnya bisa dilihat pada website https://spmb.del.ac.id/ sdi bagian menu `INFO & PENDAFTARAN` dan pilih jalur seleksi yang kamu ikuti"
     },
     {
         question: "pelaksanaan psikotes",
-        answer: "Jadwal psikotes SPMB IT Del berbeda-beda tergantung jalur seleksi yang diikuti. Untuk lebih detailnya bisa dilihat pada website https://spmb.del.ac.id/ sdi bagian menu `INFO & PENDAFTARAN` dan pilih jalur seleksi yang kamu ikuti",
+        answer: "Jadwal psikotes SPMB IT Del berbeda-beda tergantung jalur seleksi yang diikuti. Untuk lebih detailnya bisa dilihat pada website https://spmb.del.ac.id/ sdi bagian menu `INFO & PENDAFTARAN` dan pilih jalur seleksi yang kamu ikuti"
     },
 ];
 
+// Fungsi untuk menampilkan kategori seleksi
 function selectCategory(category) {
-    document.getElementById("categories").style.display = "none";
-    document.getElementById("chat-input").style.display = "inline-flex";
+    document.getElementById('categories').style.display = 'none'; 
+    document.getElementById('chat-input').style.display = 'inline-flex'; 
+
     var message;
     switch (category) {
-        case "Seleksi":
+        case 'Seleksi':
             message = "Anda memilih 'Seleksi'. Pilih pertanyaan di bawah ini:";
-            displayMessage(message, "admin");
-            displayQuestionButtons(seleksiRules);
+            displayMessage(message, 'admin');
+            displayQuestionButtons(seleksiRules); // Panggil fungsi untuk menampilkan pertanyaan kategori Seleksi dengan aturan yang didefinisikan di seleksiRules
             break;
-        case "Pendaftaran":
-            message =
-                "Anda memilih 'Pendaftaran'. Pilih pertanyaan di bawah ini:";
-            displayMessage(message, "admin");
-            displayQuestionButtons(pendaftaranRules);
+        case 'Pendaftaran':
+            message = "Anda memilih 'Pendaftaran'. Pilih pertanyaan di bawah ini:";
+            displayMessage(message, 'admin');
+            displayQuestionButtons(pendaftaranRules); // Panggil fungsi untuk menampilkan pertanyaan kategori Pendaftaran dengan aturan yang didefinisikan di pendaftaranRules
             break;
-        case "Jadwal":
+        case 'Jadwal':
             message = "Anda memilih 'Jadwal'. Pilih pertanyaan di bawah ini:";
-            displayMessage(message, "admin");
-            displayQuestionButtons(jadwalRules);
+            displayMessage(message, 'admin');
+            displayQuestionButtons(jadwalRules); // Panggil fungsi untuk menampilkan pertanyaan kategori Seleksi dengan aturan yang didefinisikan di seleksiRules
             break;
-        case "Biaya":
+        case 'Biaya':
             message = "Anda memilih 'Biaya'. Pilih pertanyaan di bawah ini:";
-            displayMessage(message, "admin");
-            displayQuestionButtons(biayaRules);
+            displayMessage(message, 'admin');
+            displayQuestionButtons(biayaRules); // Panggil fungsi untuk menampilkan pertanyaan kategori Seleksi dengan aturan yang didefinisikan di seleksiRules
             break;
-        case "Beasiswa":
+        case 'Beasiswa':
             message = "Anda memilih 'Beasiswa'. Pilih pertanyaan di bawah ini:";
-            displayMessage(message, "admin");
-            displayQuestionButtons(beasiswaRules);
+            displayMessage(message, 'admin');
+            displayQuestionButtons(beasiswaRules); // Panggil fungsi untuk menampilkan pertanyaan kategori Seleksi dengan aturan yang didefinisikan di seleksiRules
             break;
-        case "Fasilitas":
-            message =
-                "Anda memilih 'Fasilitas'. Pilih pertanyaan di bawah ini:";
-            displayMessage(message, "admin");
-            displayQuestionButtons(fasilitasRules);
+        case 'Fasilitas':
+            message = "Anda memilih 'Fasilitas'. Pilih pertanyaan di bawah ini:";
+            displayMessage(message, 'admin');
+            displayQuestionButtons(fasilitasRules); // Panggil fungsi untuk menampilkan pertanyaan kategori Seleksi dengan aturan yang didefinisikan di seleksiRules
             break;
+        // Tambahkan case untuk kategori lain jika diperlukan
         default:
             message = "Bagaimana saya bisa membantu Anda?";
-            displayMessage(message, "admin");
+            displayMessage(message, 'admin');
             break;
     }
-    document.getElementById("chatbot-container").classList.add("open");
+    document.getElementById('chatbot-container').classList.add('open');
 }
 
+// Fungsi untuk menampilkan tombol pertanyaan kategori seleksi
 function displayQuestionButtons(rules) {
-    var questionList = document.createElement("ul");
-    questionList.classList.add("question-list");
-    rules.forEach(function (rule) {
-        var listItem = document.createElement("li");
+    var questionList = document.createElement('ul');
+    questionList.classList.add('question-list');
+
+    rules.forEach(function(rule) {
+        var listItem = document.createElement('li');
         listItem.textContent = rule.question;
-        listItem.classList.add("question-button");
-        listItem.onclick = function () {
+        listItem.classList.add('question-button');
+        listItem.onclick = function() {
             processUserInput(rule.question);
         };
         questionList.appendChild(listItem);
     });
-    document.getElementById("chatbot-content").appendChild(questionList);
+
+    document.getElementById('chatbot-content').appendChild(questionList);
 }
 
-function matchRule(
-    input,
-    seleksiRules,
-    additionalRules,
-    pendaftaranRules,
-    jadwalRules,
-    biayaRules,
-    beasiswaRules,
-    fasilitasRules
-) {
-    input = input.toLowerCase();
-    var allRules = seleksiRules.concat(
-        additionalRules,
-        pendaftaranRules,
-        jadwalRules,
-        biayaRules,
-        beasiswaRules,
-        fasilitasRules
-    );
+// Fungsi untuk mencocokkan input pengguna dengan aturan yang ada
+function matchRule(input, seleksiRules, additionalRules, pendaftaranRules, jadwalRules, biayaRules, beasiswaRules, fasilitasRules) {
+    input = input.toLowerCase(); // Ubah input menjadi huruf kecil untuk pencocokan yang tidak case-sensitive
+
+    var allRules = seleksiRules.concat(additionalRules, pendaftaranRules, jadwalRules, biayaRules, beasiswaRules, fasilitasRules);
+
+    // Periksa semua aturan
     for (var i = 0; i < allRules.length; i++) {
         var rule = allRules[i];
-        var keywords = rule.question.toLowerCase().split(" ");
+        var keywords = rule.question.toLowerCase().split(' ');
         var match = true;
-        keywords.forEach(function (keyword) {
+        keywords.forEach(function(keyword) {
             if (input.indexOf(keyword) === -1) {
                 match = false;
             }
@@ -892,81 +879,93 @@ function matchRule(
             return rule.answer;
         }
     }
+
+    // Jika tidak ada aturan yang cocok, kembalikan pesan default
     return "Maaf, saya tidak mengerti pertanyaan Anda.";
 }
 
+// Fungsi untuk menampilkan jawaban
 function displayAnswer(answer) {
-    displayMessage(answer, "admin");
+    displayMessage(answer, 'admin');
 }
 
+// Fungsi untuk memproses input pengguna
 function processUserInput(input) {
-    displayMessage(input, "user");
-    if (input.trim() !== "") {
-        var answer = matchRule(
-            input,
-            seleksiRules,
-            additionalRules,
-            pendaftaranRules,
-            jadwalRules,
-            biayaRules,
-            beasiswaRules,
-            fasilitasRules
-        );
+    displayMessage(input, 'user'); // Menampilkan pesan pengguna di chat
+    if (input.trim() !== '') { // Periksa apakah input tidak kosong
+        var answer = matchRule(input, seleksiRules, additionalRules, pendaftaranRules, jadwalRules, biayaRules, beasiswaRules, fasilitasRules);
         displayAnswer(answer);
     }
 }
-function sendMessage() {
-    var userInput = document.getElementById("user-input").value;
-    processUserInput(userInput);
-    document.getElementById("user-input").value = "";
-}
 
+// Fungsi untuk menampilkan pesan di chat
 function displayMessage(message, sender) {
-    var chatContent = document.getElementById("chatbot-content");
-    var chatMessage = document.createElement("div");
-    chatMessage.className = "chat-message";
-
-    var messageClass = sender === "user" ? "user-message" : "admin-message";
-
-    if (message.split(" ").length > 20) {
-        var shortenedMessage = message.split(" ").slice(0, 20).join(" ");
-        var remainingMessage = message.split(" ").slice(20).join(" ");
-        chatMessage.innerHTML =
-            "<p class='" +
-            messageClass +
-            "'><strong>" +
-            (sender === "user" ? "You" : "Admin") +
-            ": </strong>" +
-            shortenedMessage +
-            " <a href='#' class='read-more'>Read More</a></p>";
-        chatContent.appendChild(chatMessage);
-        chatContent.scrollTop = chatContent.scrollHeight;
-
-        // Store the remaining part for 'Read More' functionality
-        chatMessage.dataset.remainingMessage = remainingMessage;
-    } else {
-        chatMessage.innerHTML =
-            "<p class='" +
-            messageClass +
-            "'><strong>" +
-            (sender === "user" ? "You" : "Admin") +
-            ": </strong>" +
-            message +
-            "</p>";
-        chatContent.appendChild(chatMessage);
-        chatContent.scrollTop = chatContent.scrollHeight;
-    }
-
-    // Add event listener for Read More
-    chatMessage.querySelectorAll(".read-more").forEach(function (link) {
-        link.addEventListener("click", function (e) {
-            e.preventDefault();
-            var parent = this.parentElement.parentElement;
-            var remainingMessage = parent.dataset.remainingMessage;
-            parent.innerHTML += " " + remainingMessage;
-            this.remove(); // Remove the 'Read More' link
-        });
-    });
+    var chatContent = document.getElementById('chatbot-content');
+    var chatMessage = document.createElement('div');
+    chatMessage.className = 'chat-message';
+    
+    var messageClass = sender === 'user' ? 'user-message' : 'admin-message'; // Determine the class based on the sender
+    
+    chatMessage.innerHTML = "<p><strong>" + (sender === 'user' ? 'You' : 'Admin') + ": </strong>" + message + "</p>";
+    chatMessage.classList.add(messageClass); // Add the appropriate class
+    chatContent.appendChild(chatMessage);
+    chatContent.scrollTop = chatContent.scrollHeight;
 }
+
+
+// Fungsi untuk mengirim pesan
+function sendMessage() {
+    var userInput = document.getElementById('user-input').value;
+    processUserInput(userInput); // Memproses input pengguna
+    document.getElementById('user-input').value = ''; // Mengosongkan input setelah pengguna mengirim pesan
+}
+
+// function displayMessage(message, sender) {
+//     var chatContent = document.getElementById("chatbot-content");
+//     var chatMessage = document.createElement("div");
+//     chatMessage.className = "chat-message";
+
+//     var messageClass = sender === "user" ? "user-message" : "admin-message";
+
+//     if (message.split(" ").length > 20) {
+//         var shortenedMessage = message.split(" ").slice(0, 20).join(" ");
+//         var remainingMessage = message.split(" ").slice(20).join(" ");
+//         chatMessage.innerHTML =
+//             "<p class='" +
+//             messageClass +
+//             "'><strong>" +
+//             (sender === "user" ? "You" : "Admin") +
+//             ": </strong>" +
+//             shortenedMessage +
+//             " <a href='#' class='read-more'>Read More</a></p>";
+//         chatContent.appendChild(chatMessage);
+//         chatContent.scrollTop = chatContent.scrollHeight;
+
+//         // Store the remaining part for 'Read More' functionality
+//         chatMessage.dataset.remainingMessage = remainingMessage;
+//     } else {
+//         chatMessage.innerHTML =
+//             "<p class='" +
+//             messageClass +
+//             "'><strong>" +
+//             (sender === "user" ? "You" : "Admin") +
+//             ": </strong>" +
+//             message +
+//             "</p>";
+//         chatContent.appendChild(chatMessage);
+//         chatContent.scrollTop = chatContent.scrollHeight;
+//     }
+
+//     // Add event listener for Read More
+//     chatMessage.querySelectorAll(".read-more").forEach(function (link) {
+//         link.addEventListener("click", function (e) {
+//             e.preventDefault();
+//             var parent = this.parentElement.parentElement;
+//             var remainingMessage = parent.dataset.remainingMessage;
+//             parent.innerHTML += " " + remainingMessage;
+//             this.remove(); // Remove the 'Read More' link
+//         });
+//     });
+// }
 
 
